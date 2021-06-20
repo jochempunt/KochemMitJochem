@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;500&display=swap');
+
+:root{
+    --lightblue: rgb(162, 183, 247);
+}
+
+body{
+    max-width: 100% ;
+    overflow-x: hidden;
+    font-family: 'Poppins', sans-serif;
+    top: 0;
+    margin: 0 auto;
+    position:relative;
+    display: grid;
+    background-image: url("../images/utensils.svg");
+    background-size:contain;
+    background-repeat:repeat;
+    background-position-y: 50px;
+    grid-template-areas: "header" "main";
+    grid-template-rows: 50px 1fr;
+    
+}
+
+header{
+    display: flex;
+    align-items: center;
+    justify-content:center;
+
+    grid-area: header;
+}
+
+main{
+    justify-self: center;
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 80%;
+    align-content: space-around;
+    justify-content: center;
+    text-align: center;
+    grid-area: main;
+   
+}
+
+h1{
+    margin-left: 30%;
+    margin-right:30%;
+    font-size: 2.3em;
+}
+
+input[type="text"],
+input[type="password"]{
+    width: 80%;
+    height: 2em;
+    margin: 0.5rem;
+    font-size: 1.2em;
+    border-width: 0.3rem;
+    border-color:var(--lightblue);
+    border-style: solid;
+    
+}
+
+form{
+    min-width: 170px;
+}
+
+#disclaimer{
+    max-width:300px;
+    background-color:var(--lightblue);
+    color: white;
+    font-size: 1.3em;
+   
+}
+
+input[type="button"]{
+    background-color: rgb(97, 162, 236);
+    border: none;
+    font-size: 1.5em;
+    border-radius: 1rem;
+    padding: 0.5rem;
+    color: rgb(255, 255, 255);
+   
+}
+
+input[type="button"]:active{
+    background-color: var(--lightblue);
+}
+
+h1,header{
+    color: white;
+    background-color:var(--lightblue);
+    
+    
+}
+h1{
+    margin-top: 1em;
+   
+}
+#nakedLink{
+    background-color: white;
+    border-width: 0.2rem;
+    border-color: var(--lightblue);
+    border-style: solid;
+    margin: 1em;
+}
