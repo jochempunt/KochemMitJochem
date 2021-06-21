@@ -14,7 +14,7 @@ body{
     display: grid;
     background-image: url("../images/utensils.svg");
     background-size:200px;
-    background-attachment: fixed;
+    
     background-repeat:repeat-x;
     background-position-y: 50px;
     background-position-x: 5px;
@@ -117,6 +117,10 @@ h1{
     display: inline;
     margin: 0.5rem;
 }
+#filters ul{
+    list-style: none;
+    padding-left:0 ;
+}
 
 #recepies{
     display: flex;
@@ -126,4 +130,66 @@ h1{
 .recipe{
     display: block;
     text-align: left;
+    border-style: solid;
+    border-radius: 0.5rem;
+    border-color:rgb(71, 107, 214); 
+    border-width: 0.125rem;
+    padding-left:0.5rem;
+    margin-bottom: 1rem;
+    
+    box-shadow: 0.2rem 0.1rem 0.2rem rgba(0, 0, 0, 0.171);
+}
+
+.recipe h4{
+    margin-top: 0.3rem;
+    margin-bottom: 0.3rem;
+    font-size: 1.5em;
+    
+}
+
+.recipe .time{
+    background-color: lightgray;
+    border-radius: 1rem;
+    width: min-content;
+    min-width: 100px;
+    padding: 0.3rem;
+    text-align: center;
+}
+
+.recipe .course{
+    float:right;
+    
+    width: 100px;
+    border-radius:0 0.37rem 0 0;
+    
+    border-style: solid;
+    border-width: 0rem;
+    padding: 0.5rem;
+    margin:0;
+    font-size: 1.2em;
+    text-align: center;
+}
+.main{
+    background-color: lightsalmon;
+    border-color: lightsalmon;
+}
+
+.dessert{
+    background-color: lightpink;
+    border-color: lightpink;
+}
+
+.starter{
+    background-color: lightgreen;
+    border-color: lightgreen;
+}
+
+.misc{
+    background-color: lightskyblue;
+    border-color: lightskyblue;
+}
+
+h3{
+    margin-bottom: 0;
+    margin-top: 0;
 }
