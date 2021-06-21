@@ -6,12 +6,17 @@ body{
     margin:0;
 
 }
+.fa-plus-circle{
+    color: lightskyblue;    
+    }
 header{
+   
     color: white;
+  
     background-color: rgb(162, 183, 247);
     margin-top: 0;
     text-align: center;
-    height: 50px;
+ 
     
 }
 
@@ -24,4 +29,85 @@ h2{
 em{
     font-weight: 550;
     font-style: normal;
+}
+
+main{
+    margin-left:1rem;
+}
+
+#back_cancel{
+    font-size: 2em;
+    float: left;
+    margin-top: 0.5rem;
+    margin-left: 0.5rem;
+}
+
+.center{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-content: center;
+}
+
+form{
+    margin-top: 2em;
+    font-size: 1.7em;
+}
+a .fas{
+    color: white;
+}
+
+textarea,
+input[type="text"]{
+    font-size:1em;
+}
+
+.amount {
+    width: 25%;
+}
+
+.ingredient{
+    width: 65%;
+}
+
+#ingredients{
+    max-width: 400px;
+}
+
+
+
+
+.widthMax input{
+    width: 90vw;
+    max-width: 377px;
+    min-width: 10px;
+}
+
+#directionL{
+    font-size: 1.7em;
+}
+textarea{
+    resize: none;
+    min-width: 100px;
+    width: 90vw;
+    max-width: 377px;
+    height: 450px;
+    
+}
+
+select{
+    font-size: 1.3rem;
+}
+
+#finishButtonMobile{
+    border-radius: 5em;
+    font-size: 1.5em;
+    color: white;
+    width: min-content;
+    background-color:rgb(124, 153, 241) ;
+    padding: 0.6em 0.8em;
+    position: fixed;
+    top: 85%;
+    right: 15px;
+    z-index: 2;
 }
