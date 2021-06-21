@@ -13,7 +13,7 @@ body{
     position:relative;
     display: grid;
     background-image: url("../images/utensils.svg");
-    background-size:400px;
+    background-size:200px;
     background-attachment: fixed;
     background-repeat:repeat;
     background-position-y: 50px;
