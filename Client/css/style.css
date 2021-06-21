@@ -31,6 +31,18 @@ header{
     grid-area: header;
 }
 
+nav{
+    display: flex;
+    justify-content: space-evenly;
+    align-content: center;
+    width:100%;
+}
+
+nav i{
+    font-size: 2em;
+    margin: 0.5em;
+}
+
 main{
     justify-self: center;
     display: flex;
@@ -192,4 +204,18 @@ h1{
 h3{
     margin-bottom: 0;
     margin-top: 0;
+}
+
+.icon{
+    width: 40px;
+    height: auto;
+    filter: invert();
+}
+
+.fa-heart{
+    float: right;
+    font-size: 1.5em;
+    margin-bottom: 0.3rem;
+    margin-right: 0.6rem;
+    color: rgb(17, 54, 163); 
 }
