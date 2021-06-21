@@ -15,8 +15,9 @@ body{
     background-image: url("../images/utensils.svg");
     background-size:200px;
     background-attachment: fixed;
-    background-repeat:repeat;
+    background-repeat:repeat-x;
     background-position-y: 50px;
+    background-position-x: 5px;
     grid-template-areas: "header" "main";
     grid-template-rows: 50px 1fr;
     
@@ -33,12 +34,14 @@ header{
 main{
     justify-self: center;
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
     max-width: 80%;
     align-content: space-around;
     justify-content: center;
     text-align: center;
     grid-area: main;
+    
    
 }
 
@@ -69,6 +72,7 @@ form{
     background-color:var(--lightblue);
     color: white;
     font-size: 1.3em;
+    margin-top: 150px;
    
 }
 
@@ -93,7 +97,7 @@ h1,header{
     
 }
 h1{
-    margin-top: 1em;
+    margin-top: 0.4em;
     padding-left: 1rem;
     padding-right: 1rem;
    
@@ -103,5 +107,23 @@ h1{
     border-width: 0.2rem;
     border-color: var(--lightblue);
     border-style: solid;
-    margin: 1em;
+    margin-top: 1em;
+    max-width: 50%;
+    left: 33%;
+    transform: translate(50%,0);
+}
+
+#filters li{
+    display: inline;
+    margin: 0.5rem;
+}
+
+#recepies{
+    display: flex;
+    flex-direction: column;
+}
+
+.recipe{
+    display: block;
+    text-align: left;
 }
