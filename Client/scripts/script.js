@@ -34,7 +34,7 @@ var KMJ;
                 sessionStorage.currentP = "ALL";
                 break;
             case "faveIcon":
-                siteTitle.innerText = "Favorites";
+                siteTitle.innerText = "My Favorites";
                 icon = document.getElementById("faveIcon");
                 sessionStorage.currentP = "FAVORITES";
                 break;
@@ -79,6 +79,7 @@ var KMJ;
             recipeContainer.appendChild(timeParagraph);
             let heartIcon = document.createElement("i");
             heartIcon.className = "far fa-heart";
+            heartIcon.id = "heart";
             recipeContainer.appendChild(heartIcon);
             let authorParagraph = document.createElement("p");
             authorParagraph.innerHTML = "<i>" + recipe.author + "</i>";
@@ -93,11 +94,17 @@ var KMJ;
     function viewRecipe(_event) {
         let rp = _event.target;
         if (rp.className != "recipe") {
-            if (rp.parentElement.className == "recipe") {
-                rp = rp.parentElement;
+            if (rp.id == "heart") {
+                rp.className = "fas fa-heart";
+                return;
             }
             else {
-                rp = rp.parentElement.parentElement;
+                if (rp.parentElement.className == "recipe") {
+                    rp = rp.parentElement;
+                }
+                else {
+                    rp = rp.parentElement.parentElement;
+                }
             }
         }
         //

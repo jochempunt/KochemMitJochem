@@ -4,26 +4,30 @@ body{
     font-family: 'Poppins', sans-serif;
     top: 0;
     margin:0;
-
+    
 }
 .fa-plus-circle{
     color: lightskyblue;    
-    }
+}
 header{
-   
+    
     color: white;
-  
+    
     background-color: rgb(162, 183, 247);
     margin-top: 0;
     text-align: center;
- 
+    
     
 }
-
+h1{
+    font-size: 2em;
+}
 h2{
     margin-top: 0;  
     margin-bottom: 0;
     padding-top: 8px;
+    font-size: 1.4em;
+    transition: all .2s linear;
 }
 
 em{
@@ -40,6 +44,7 @@ main{
     float: left;
     margin-top: 0.5rem;
     margin-left: 0.5rem;
+    transition: all .2s linear;
 }
 
 .center{
@@ -50,7 +55,7 @@ main{
 }
 
 form{
-    margin-top: 2em;
+    margin-top: 1em;
     font-size: 1.7em;
 }
 a .fas{
@@ -64,6 +69,10 @@ input[type="number"]{
 }
 #title{
     margin-bottom:0.5rem ;
+}
+
+#author{
+    font-style: italic;
 }
 
 .amount {
@@ -115,3 +124,63 @@ select{
     right: 15px;
     z-index: 2;
 }
+
+
+#course{
+    margin: inherit;
+    width: min-content;
+    padding: 0.4rem;
+    text-align: center;
+}
+
+
+
+.main{
+    background-color:lightsalmon ;
+}
+
+.starter{
+    background-color: lightgreen;
+}
+
+.dessert{
+    background-color: lightpink;
+}
+
+.misc{
+    background-color: lightskyblue;
+}
+
+
+@media screen and (min-width:606px){
+    main{
+        max-width: 600px;
+        background-color: white;
+        height: 100vh;
+        padding: 0 1rem;
+        box-shadow: 0px 3px 4px 4px rgba(0, 0, 0, 0.075);
+    }  
+    
+    h2{
+        font-size: 1.8em;
+    }
+    #back_cancel{
+        margin-top:0.7rem ;
+        
+    }
+    
+    .mittig{
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        
+    }
+    .edit{
+        width: 550px;
+        
+    }
+    .widthMax input,textArea{
+        max-width: 540px;
+    }
+    
+} 
