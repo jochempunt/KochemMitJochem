@@ -83,10 +83,29 @@ var KMJ;
             let authorParagraph = document.createElement("p");
             authorParagraph.innerHTML = "<i>" + recipe.author + "</i>";
             recipeContainer.appendChild(authorParagraph);
+            //---- replace with recipe ID after database anknüpfung
+            recipeContainer.dataset.recipeId = recipe.title;
             recipiesContainer.appendChild(recipeContainer);
+            recipeContainer.addEventListener("click", viewRecipe);
         }
     }
-    // ------ filtersearch --------//
+    //----------------------------------------view Recipe------------//
+    function viewRecipe(_event) {
+        let rp = _event.target;
+        if (rp.className != "recipe") {
+            if (rp.parentElement.className == "recipe") {
+                rp = rp.parentElement;
+            }
+            else {
+                rp = rp.parentElement.parentElement;
+            }
+        }
+        //
+        sessionStorage.viewRecipeId = rp.dataset.recipeId;
+        console.log(sessionStorage.viewRecipeId);
+        window.location.href = "view.html";
+    }
+    // --------------------------------------- filtersearch --------//
     document.getElementById("submitFilters").addEventListener("click", filterSearch);
     function filterSearch() {
         let filterform = new FormData(document.forms[0]);
