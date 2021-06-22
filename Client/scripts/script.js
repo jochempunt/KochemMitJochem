@@ -11,6 +11,9 @@ var KMJ;
         }
     }
     console.log(sessionStorage.currentP);
+    if (sessionStorage.currentP == "MYRECIPES") {
+        console.log("ja");
+    }
     switch (sessionStorage.currentP) {
         case "FAVORITES":
             document.getElementById("faveIcon").click();
