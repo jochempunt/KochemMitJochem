@@ -11,7 +11,7 @@ var KMJ;
                 { amount: "3", name: "eier" },
                 { amount: "eine prise", name: "salz" }
             ],
-            directions: "1. ei in die pfanne,2. ei anbraten, 2. salz hinzufügen"
+            directions: "1. ei in die pfanne \n 2. ei anbraten \n 3. salz hinzufügen"
         },
         { title: "pfannenkuchen",
             author: "mora",
@@ -24,7 +24,7 @@ var KMJ;
                 { amount: "130ml", name: "milch" },
                 { amount: "20g", name: "butter" }
             ],
-            directions: "1. ei mit milch und mehl verrühren ,2. butter in pfanne schmelzen, 3. pfannkuchen backen bis leicht braun" },
+            directions: "1. ei mit milch und mehl verrühren \n 2. butter in pfanne schmelzen \n 3. pfannkuchen backen bis leicht braun" },
         { title: "kuchen",
             author: "ora",
             portions: 3,
@@ -36,7 +36,7 @@ var KMJ;
                 { amount: "130ml", name: "milch" },
                 { amount: "20g", name: "butter" }
             ],
-            directions: "1. ei mit milch und mehl verrühren ,2. butter in pfanne schmelzen, 3. pfannkuchen backen bis leicht braun" },
+            directions: "1. ei mit milch und mehl verrühren \n 2. butter in pfanne schmelzen \n 3. pfannkuchen backen bis leicht braun" },
         {
             title: "ei mit spack",
             author: "jochem234",
@@ -47,7 +47,7 @@ var KMJ;
                 { amount: "3", name: "eier" },
                 { amount: "eine prise", name: "salz" }
             ],
-            directions: "1. ei in die pfanne,2. ei anbraten, 2. salz hinzufügen"
+            directions: "1. ei in die pfanne \n 2. ei anbraten \n 3. salz hinzufügen"
         }
     ];
 })(KMJ || (KMJ = {}));
