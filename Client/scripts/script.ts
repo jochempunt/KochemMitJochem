@@ -1,4 +1,5 @@
 namespace KMJ {
+
     
     
     /*   enum Page {
@@ -31,11 +32,11 @@ namespace KMJ {
         document.getElementById("allIcon").click();
         break;
     }
-}
 
 
 
-function changePage(_event: Event): void {
+
+    function changePage(_event: Event): void {
     let siteTitle: HTMLHeadingElement = <HTMLHeadingElement> document.getElementById("site_title");
     let icon: HTMLHtmlElement = undefined;
     
@@ -57,12 +58,13 @@ function changePage(_event: Event): void {
         icon = <HTMLHtmlElement> document.getElementById("myIcon");
         break;
     }
-    
     for (let ico of navicons) {
         ico.className = ico.className.replace("currentIcon", "");
     }    
     icon.className = icon.className + " currentIcon";
+}
     
+ 
 }
 
 
