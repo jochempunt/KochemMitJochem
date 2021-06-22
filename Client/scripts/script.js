@@ -11,17 +11,14 @@ var KMJ;
         }
     }
     console.log(sessionStorage.currentP);
-    if (sessionStorage.currentP == "MYRECIPES") {
-        console.log("ja");
-    }
     switch (sessionStorage.currentP) {
         case "FAVORITES":
             document.getElementById("faveIcon").click();
             break;
         case "MYRECIPES":
             document.getElementById("myIcon").click();
-            console.log("hallooo???");
-        case "ALL":
+            break;
+        default:
             document.getElementById("allIcon").click();
             break;
     }
