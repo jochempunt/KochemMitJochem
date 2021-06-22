@@ -32,7 +32,7 @@ namespace KMJ {
         break;
         case "MYRECIPES":
         document.getElementById("myIcon").click();
-        default:
+        case "ALL":
         document.getElementById("allIcon").click();
         break;
     }
