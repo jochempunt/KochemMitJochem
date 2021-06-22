@@ -214,10 +214,7 @@ a .fas{
 
 .recipe .course{
     float:right;
-    
-    width: 100px;
     border-radius:0 0.37rem 0 0;
-    
     border-style: solid;
     border-width: 0rem;
     padding: 0.5rem;

@@ -43,7 +43,8 @@ namespace KMJ {
     let icon: HTMLHtmlElement = undefined;
     
     let clickedIcon: HTMLElement = <HTMLElement>_event.target;
-    switch (clickedIcon.id) {
+    let pageId: string = clickedIcon.id;
+    switch (pageId) {
         case "allIcon":
         siteTitle.innerText = "All Recipes";
         icon = <HTMLHtmlElement> document.getElementById("allIcon");
@@ -64,8 +65,90 @@ namespace KMJ {
         ico.className = ico.className.replace("currentIcon", "");
     }    
     icon.className = icon.className + " currentIcon";
+
+    getRecipes(["main", "dessert", "starter", "misc"], "ALL");
+
 }
     
+
+
+
+    function getRecipes(_filters: string[], _page: string): void {
+        
+        
+        let foundrecipes: Recipe[] = [];
+        for (let  recipe of recipes ) {
+            for (let i: number = 0; i <= _filters.length; i++) {
+                console.log(recipe.title + ":" + recipe.course);
+                if (recipe.course == _filters[i]) {
+                    foundrecipes[foundrecipes.length] = recipe;
+                    break;
+                    
+                }
+            }
+        }
+
+        let recipiesContainer: HTMLDivElement = <HTMLDivElement> document.getElementById("recepies");
+        recipiesContainer.innerHTML = "";
+
+        for ( let recipe of foundrecipes) {
+            let recipeContainer: HTMLDivElement = document.createElement("div");
+            recipeContainer.className = "recipe";
+            
+            let courseParagraph: HTMLParagraphElement = document.createElement("p");
+            courseParagraph.innerText = recipe.course;
+            courseParagraph.className = "course " + recipe.course;
+            recipeContainer.appendChild(courseParagraph);
+
+            let recipeTitle: HTMLHeadingElement = document.createElement("h4");
+            recipeTitle.innerText = recipe.title;
+            recipeContainer.appendChild(recipeTitle);
+
+            let timeParagraph: HTMLParagraphElement = document.createElement("p");
+            timeParagraph.className = "time";
+            timeParagraph.innerText = recipe.duration;
+            recipeContainer.appendChild(timeParagraph);
+
+            let heartIcon: HTMLElement = document.createElement("i");
+            heartIcon.className = "far fa-heart";
+            recipeContainer.appendChild(heartIcon);
+
+            let authorParagraph: HTMLParagraphElement = document.createElement("p");
+            authorParagraph.innerHTML = "<i>" + recipe.author + "</i>";
+            recipeContainer.appendChild(authorParagraph);
+
+            recipiesContainer.appendChild(recipeContainer);
+
+        }
+
+
+    }
+
+// ------ filtersearch --------//
+
+
+    document.getElementById("submitFilters").addEventListener("click", filterSearch);
+
+
+    function filterSearch(): void {
+        let filterform: FormData = new FormData(document.forms[0]);
+      
+        
+        let filters: string[] = [];
+        for (let i: number = 1; i <= 4; i++ ) {
+            if (filterform.get("course" + i)) {
+                filters[filters.length] = "" + filterform.get("course" + i);
+            }
+        }
+        if(filters.length == 0){
+            filters = ["starter", "main", "dessert","misc"];
+        }
+        console.log(filters);
+        
+        getRecipes(filters, "ALL");
+    }
+
+
  
 }
 
@@ -83,4 +166,4 @@ namespace KMJ {
 
 
 
-}
+
