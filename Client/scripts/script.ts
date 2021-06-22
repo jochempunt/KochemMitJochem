@@ -18,6 +18,11 @@ namespace KMJ {
         }
           
     }
+
+        if (sessionStorage.currentP){
+            console.log(sessionStorage.currentP);
+            
+        }
         document.getElementById("allIcon").click();
     
     

@@ -10,6 +10,9 @@ var KMJ;
             ico.addEventListener("click", changePage);
         }
     }
+    if (sessionStorage.currentP) {
+        console.log(sessionStorage.currentP);
+    }
     document.getElementById("allIcon").click();
     function changePage(_event) {
         let siteTitle = document.getElementById("site_title");
