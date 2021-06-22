@@ -59,8 +59,9 @@ main{
 }
 
 #underBanner{
-    position: absolute;
-    top: 200px;
+    position: relative;
+    top: 40px;
+   
 }
 
 h1{
