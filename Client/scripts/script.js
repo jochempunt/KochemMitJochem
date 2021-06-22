@@ -20,6 +20,7 @@ var KMJ;
             break;
         case "MYRECIPES":
             document.getElementById("myIcon").click();
+            console.log("hallooo???");
         case "ALL":
             document.getElementById("allIcon").click();
             break;
