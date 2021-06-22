@@ -6,7 +6,7 @@ namespace KMJ {
     }  */
     
        
-        document.getElementById("allIcon").click();
+       
         
     
     
@@ -15,13 +15,10 @@ namespace KMJ {
         for (let ico of navicons) {
         if (ico.id) {
             ico.addEventListener("click", changePage);
-            console.log(ico.id);
-            console.log("1");
         }
-        
-        
+          
     }
-    
+        document.getElementById("allIcon").click();
     
     
         function changePage(_event: Event): void {

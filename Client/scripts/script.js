@@ -4,15 +4,13 @@ var KMJ;
     /*   enum Page {
         ALL, FAVORITE, MYRECIPES
     }  */
-    document.getElementById("allIcon").click();
     let navicons = document.querySelectorAll("nav i");
     for (let ico of navicons) {
         if (ico.id) {
             ico.addEventListener("click", changePage);
-            console.log(ico.id);
-            console.log("1");
         }
     }
+    document.getElementById("allIcon").click();
     function changePage(_event) {
         let siteTitle = document.getElementById("site_title");
         let icon = undefined;
