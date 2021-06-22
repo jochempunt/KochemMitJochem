@@ -21,10 +21,19 @@ namespace KMJ {
 
         if (sessionStorage.currentP){
             console.log(sessionStorage.currentP);
-            
+            switch (sessionStorage.currentP) {
+                case "FAVORITES":
+                    document.getElementById("faveIcon").click();
+                    break;
+                case "MYRECIPES":
+                    document.getElementById("myIcon").click();
+                default:
+                    document.getElementById("allIcon").click();
+                    break;
+            }
         }
-        document.getElementById("allIcon").click();
-    
+        
+       
     
         function changePage(_event: Event): void {
         let siteTitle: HTMLHeadingElement = <HTMLHeadingElement> document.getElementById("site_title");
