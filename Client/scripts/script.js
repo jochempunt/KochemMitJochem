@@ -10,44 +10,42 @@ var KMJ;
             ico.addEventListener("click", changePage);
         }
     }
-    if (sessionStorage.currentP) {
-        console.log(sessionStorage.currentP);
-        switch (sessionStorage.currentP) {
-            case "FAVORITES":
-                document.getElementById("faveIcon").click();
-                break;
-            case "MYRECIPES":
-                document.getElementById("myIcon").click();
-            default:
-                document.getElementById("allIcon").click();
-                break;
-        }
-    }
-    function changePage(_event) {
-        let siteTitle = document.getElementById("site_title");
-        let icon = undefined;
-        let clickedIcon = _event.target;
-        switch (clickedIcon.id) {
-            case "allIcon":
-                siteTitle.innerText = "All Recipes";
-                icon = document.getElementById("allIcon");
-                sessionStorage.currentP = "ALL";
-                break;
-            case "faveIcon":
-                siteTitle.innerText = "Favorites";
-                icon = document.getElementById("faveIcon");
-                sessionStorage.currentP = "FAVORITES";
-                break;
-            case "myIcon":
-                siteTitle.innerText = "My Recipes";
-                sessionStorage.currentP = "MYRECIPES";
-                icon = document.getElementById("myIcon");
-                break;
-        }
-        for (let ico of navicons) {
-            ico.className = ico.className.replace("currentIcon", "");
-        }
-        icon.className = icon.className + " currentIcon";
+    console.log(sessionStorage.currentP);
+    switch (sessionStorage.currentP) {
+        case "FAVORITES":
+            document.getElementById("faveIcon").click();
+            break;
+        case "MYRECIPES":
+            document.getElementById("myIcon").click();
+        default:
+            document.getElementById("allIcon").click();
+            break;
     }
 })(KMJ || (KMJ = {}));
+function changePage(_event) {
+    let siteTitle = document.getElementById("site_title");
+    let icon = undefined;
+    let clickedIcon = _event.target;
+    switch (clickedIcon.id) {
+        case "allIcon":
+            siteTitle.innerText = "All Recipes";
+            icon = document.getElementById("allIcon");
+            sessionStorage.currentP = "ALL";
+            break;
+        case "faveIcon":
+            siteTitle.innerText = "Favorites";
+            icon = document.getElementById("faveIcon");
+            sessionStorage.currentP = "FAVORITES";
+            break;
+        case "myIcon":
+            siteTitle.innerText = "My Recipes";
+            sessionStorage.currentP = "MYRECIPES";
+            icon = document.getElementById("myIcon");
+            break;
+    }
+    for (let ico of navicons) {
+        ico.className = ico.className.replace("currentIcon", "");
+    }
+    icon.className = icon.className + " currentIcon";
+}
 //# sourceMappingURL=script.js.map
