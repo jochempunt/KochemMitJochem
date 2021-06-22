@@ -13,21 +13,25 @@
     <main>
         <form id="RecipeForm">
             <div class="widthMax">
-            <input type="text" id="title" name="recipeTitle" placeholder="Title of the Recipe">
-            <div>
-                <input id="durations" type="text" name="duration" placeholder="duration">
+                <input type="text" id="title" name="recipeTitle" placeholder="Title of the Recipe">
+                <div>
+                    <input id="durations" type="text" name="duration" placeholder="duration">
+                </div>
+                <select name="selectCourse" id="select">
+                    <option value="starter">starter</option>
+                    <option value="main">main</option>
+                    <option value="dessert">dessert</option>
+                    <option value="misc">misc</option>
+                    
+                    
+                    
+                </select>
             </div>
-            <select name="selectCourse" id="select">
-                <option value="starter">starter</option>
-                <option value="main">main</option>
-                <option value="dessert">dessert</option>
-                <option value="misc">misc</option>
-                
-
-
-            </select>
+            <div class="widthMax">
+                <input id="portions" type="number" name="portions" placeholder="portions">
             </div>
             <label id="ingredientsL" for="firstAmount"><em>Ingredients</em></label>
+            
             <div id="ingredients"> 
                 <input class="amount" type="text" id="firstAmount"  name="firstAmount" placeholder="Amount">
                 <input class="ingredient" type="text" id="firstIngredientName"  name="firstIngredientName" placeholder="Name of Ingredient">
@@ -38,14 +42,14 @@
         <div>
             <textarea id="directions" name="directions" form="RecipeForm"></textarea>
         </div>
-      
+        
         
         <a href="./Main.html"><div id="finishButtonMobile"><i class="fas fa-check"></i></div></a>
-    
-    
-   
-    
-    
-</main>
+        
+        
+        
+        
+        
+    </main>
 </body>
 </html>

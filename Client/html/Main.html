@@ -6,29 +6,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/style.css">
     <script src="https://kit.fontawesome.com/b27fe84296.js" crossorigin="anonymous"></script>
+    <script src="../scripts/data.js" defer></script>
+    <script src="../scripts/script.js" defer></script>
     <title>Kochem mit Jochem</title>
 </head>
 <body>
     <header>
         <nav>
-            <i class="fas fa-list"></i>
-            <i class="fas fa-user"></i>
-            <i class="fas fa-hand-holding-heart"></i>
+            <i id="allIcon" class="fas fa-list"></i>
+            <i id="myIcon" class="fas fa-user"></i>
+            <i id="faveIcon" class="fas fa-hand-holding-heart"></i>
            <a href="./create_edit.html"> <i class="fas fa-plus-circle"></i></a>
         </nav>
     </header>
 
     <main>
-        <h1 id="title">All Recipes</h1>
+        <h1 id="site_title">All Recipes</h1>
+        <div id="underBanner">
         <h3>Filters</h3>
-        <div id="filters">
+        <form id="filters">
             <ul>
-                <li>starters</li> 
-                <li>main</li>
-                <li>desserts</li>
-                <li>misc</li>
+                <li><input type="checkbox" id="course1" name="course1" value="starter"><label for="course1">starter</label></li> 
+                <li><input type="checkbox" id="course2" name="course2" value="main"><label for="course2">main</label></li>
+                <li><input type="checkbox" id="course3" name="course3" value="dessert"><label for="course3">dessert</label></li>
+                <li><div><input type="checkbox" id="course4" name="course4" value="misc"><label for="course4">misc</label></div></li>
             </ul> 
-        </div>
+            <input type="button" id="submitFilters" name="submitFilters" value="search">
+        </form>
+    
         <section id="recepies">
           <a href="./view.html">
             <div class="recipe">
@@ -68,7 +73,7 @@
                 
             </div>
         </section>
-        
+    </div>
         
     </main>
     

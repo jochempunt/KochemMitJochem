@@ -58,8 +58,12 @@ a .fas{
 }
 
 textarea,
-input[type="text"]{
+input[type="text"],
+input[type="number"]{
     font-size:1em;
+}
+#title{
+    margin-bottom:0.5rem ;
 }
 
 .amount {
