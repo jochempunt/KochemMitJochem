@@ -3,7 +3,7 @@ namespace KMJ {
     
     
     
-    document.getElementById("createIconHidden").addEventListener("click",createRecipe);
+    document.getElementById("createIconHidden").addEventListener("click", createRecipe);
     
     function createRecipe(): void {
         window.location.href = "./create_edit.html";
@@ -130,7 +130,7 @@ namespace KMJ {
             }
             break;
             case"MYRECIPES":
-            for (let recipe of recipes){
+            for (let recipe of recipes) {
                 if (sessionStorage.user == recipe.author) {
                     recipeList[recipeList.length] = recipe;
                 }
