@@ -1,9 +1,21 @@
 "use strict";
 var KMJ;
 (function (KMJ) {
+    KMJ.users = [
+        {
+            name: "testUser",
+            pw: "1234",
+            favorites: ["ei mit speck", "pfannenkuchen"]
+        },
+        {
+            name: "jochem",
+            pw: "punt",
+            favorites: ["kuchen", "ei mit spack"]
+        }
+    ];
     KMJ.recipes = [{
             title: "ei mit speck",
-            author: "jochem24",
+            author: "jochem",
             portions: 2,
             duration: "12min",
             course: "main",
@@ -26,7 +38,7 @@ var KMJ;
             ],
             directions: "1. ei mit milch und mehl verrühren \n 2. butter in pfanne schmelzen \n 3. pfannkuchen backen bis leicht braun" },
         { title: "kuchen",
-            author: "ora",
+            author: "jochem",
             portions: 3,
             duration: "20min",
             course: "misc",

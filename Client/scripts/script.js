@@ -1,9 +1,13 @@
 "use strict";
 var KMJ;
 (function (KMJ) {
-    /*   enum Page {
-        ALL, FAVORITE, MYRECIPES
-    }  */
+    document.getElementById("createIconHidden").addEventListener("click", createRecipe);
+    function createRecipe() {
+        window.location.href = "./create_edit.html";
+    }
+    if (!sessionStorage.user) {
+        window.location.href = "./login.html";
+    }
     let navicons = document.querySelectorAll("nav i");
     for (let ico of navicons) {
         if (ico.id) {
@@ -17,6 +21,9 @@ var KMJ;
             break;
         case "MYRECIPES":
             document.getElementById("myIcon").click();
+            if (document.getElementById("createIconHidden")) {
+                document.getElementById("createIconHidden").id = "createIcon";
+            }
             break;
         default:
             document.getElementById("allIcon").click();
@@ -27,6 +34,11 @@ var KMJ;
         let icon = undefined;
         let clickedIcon = _event.target;
         let pageId = clickedIcon.id;
+        if (sessionStorage.currentP == "MYRECIPES") {
+            if (document.getElementById("createIcon")) {
+                document.getElementById("createIcon").id = "createIconHidden";
+            }
+        }
         switch (pageId) {
             case "allIcon":
                 siteTitle.innerText = "All Recipes";
@@ -41,6 +53,9 @@ var KMJ;
             case "myIcon":
                 siteTitle.innerText = "My Recipes";
                 sessionStorage.currentP = "MYRECIPES";
+                if (document.getElementById("createIconHidden")) {
+                    document.getElementById("createIconHidden").id = "createIcon";
+                }
                 icon = document.getElementById("myIcon");
                 break;
         }
@@ -48,11 +63,37 @@ var KMJ;
             ico.className = ico.className.replace("currentIcon", "");
         }
         icon.className = icon.className + " currentIcon";
-        getRecipes(["main", "dessert", "starter", "misc"], "ALL");
+        getRecipes(["main", "dessert", "starter", "misc"], sessionStorage.currentP);
     }
     function getRecipes(_filters, _page) {
         let foundrecipes = [];
-        for (let recipe of KMJ.recipes) {
+        let recipeList = [];
+        switch (_page) {
+            case "ALL":
+                recipeList = KMJ.recipes;
+                break;
+            case "FAVORITES":
+                for (let user of KMJ.users) {
+                    if (user.name == sessionStorage.user) {
+                        for (let favorite of user.favorites)
+                            for (let recipe of KMJ.recipes) {
+                                if (favorite == recipe.title) {
+                                    recipeList[recipeList.length] = recipe;
+                                    break;
+                                }
+                            }
+                    }
+                }
+                break;
+            case "MYRECIPES":
+                for (let recipe of KMJ.recipes) {
+                    if (sessionStorage.user == recipe.author) {
+                        recipeList[recipeList.length] = recipe;
+                    }
+                }
+                break;
+        }
+        for (let recipe of recipeList) {
             for (let i = 0; i <= _filters.length; i++) {
                 console.log(recipe.title + ":" + recipe.course);
                 if (recipe.course == _filters[i]) {
@@ -126,7 +167,7 @@ var KMJ;
             filters = ["starter", "main", "dessert", "misc"];
         }
         console.log(filters);
-        getRecipes(filters, "ALL");
+        getRecipes(filters, sessionStorage.currentP);
     }
 })(KMJ || (KMJ = {}));
 //# sourceMappingURL=script.js.map

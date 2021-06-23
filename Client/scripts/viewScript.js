@@ -1,6 +1,9 @@
 "use strict";
 var KMJ;
 (function (KMJ) {
+    if (!sessionStorage.user) {
+        window.location.href = "./login.html";
+    }
     console.log(sessionStorage.viewRecipeId);
     let currentRecipe = undefined;
     for (let recipe of KMJ.recipes) {

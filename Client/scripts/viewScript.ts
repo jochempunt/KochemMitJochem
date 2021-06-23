@@ -1,4 +1,12 @@
 namespace KMJ {
+    
+    
+    if (!sessionStorage.user) {
+        window.location.href = "./login.html";
+    }
+    
+    
+    
     console.log(sessionStorage.viewRecipeId);
     let currentRecipe: Recipe = undefined;
     for (let recipe of recipes) {

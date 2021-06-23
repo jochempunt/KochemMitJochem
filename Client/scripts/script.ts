@@ -2,10 +2,22 @@ namespace KMJ {
     
     
     
-    /*   enum Page {
-        ALL, FAVORITE, MYRECIPES
-    }  */
     
+    document.getElementById("createIconHidden").addEventListener("click",createRecipe);
+    
+    function createRecipe(): void {
+        window.location.href = "./create_edit.html";
+    }
+    
+    
+    
+    
+    
+    
+    
+    if (!sessionStorage.user) {
+        window.location.href = "./login.html";
+    }
     
     
     
@@ -29,6 +41,14 @@ namespace KMJ {
         break;
         case "MYRECIPES":
         document.getElementById("myIcon").click();
+        
+        if (document.getElementById("createIconHidden")) {
+            document.getElementById("createIconHidden").id = "createIcon";
+        }
+        
+        
+        
+        
         break;
         default:
         document.getElementById("allIcon").click();
@@ -44,6 +64,16 @@ namespace KMJ {
         
         let clickedIcon: HTMLElement = <HTMLElement>_event.target;
         let pageId: string = clickedIcon.id;
+        
+        if (sessionStorage.currentP == "MYRECIPES") {
+            if (document.getElementById("createIcon")) {
+                
+                
+                document.getElementById("createIcon").id = "createIconHidden";
+            }
+        }
+        
+        
         switch (pageId) {
             case "allIcon":
             siteTitle.innerText = "All Recipes";
@@ -58,6 +88,11 @@ namespace KMJ {
             case "myIcon":
             siteTitle.innerText = "My Recipes";
             sessionStorage.currentP = "MYRECIPES";
+            if ( document.getElementById("createIconHidden")) {
+                document.getElementById("createIconHidden").id = "createIcon";
+            }
+            
+            
             icon = <HTMLHtmlElement> document.getElementById("myIcon");
             break;
         }
@@ -66,7 +101,7 @@ namespace KMJ {
         }    
         icon.className = icon.className + " currentIcon";
         
-        getRecipes(["main", "dessert", "starter", "misc"], "ALL");
+        getRecipes(["main", "dessert", "starter", "misc"], sessionStorage.currentP);
         
     }
     
@@ -75,9 +110,36 @@ namespace KMJ {
     
     function getRecipes(_filters: string[], _page: string): void {
         
-        
         let foundrecipes: Recipe[] = [];
-        for (let  recipe of recipes ) {
+        let recipeList: Recipe[] = [];
+        switch (_page) {
+            case "ALL":
+            recipeList = recipes;
+            break;
+            case"FAVORITES": 
+            for (let user of users) {
+                if ( user.name == sessionStorage.user) {
+                    for (let favorite of user.favorites)
+                    for ( let recipe of recipes) {
+                        if (favorite == recipe.title) {
+                            recipeList[recipeList.length] = recipe;
+                            break;
+                        }
+                    }
+                }
+            }
+            break;
+            case"MYRECIPES":
+            for (let recipe of recipes){
+                if (sessionStorage.user == recipe.author) {
+                    recipeList[recipeList.length] = recipe;
+                }
+            }
+            break;
+        }
+        
+        
+        for (let  recipe of recipeList ) {
             for (let i: number = 0; i <= _filters.length; i++) {
                 console.log(recipe.title + ":" + recipe.course);
                 if (recipe.course == _filters[i]) {
@@ -87,6 +149,14 @@ namespace KMJ {
                 }
             }
         }
+        
+        
+        
+        
+        
+        
+        
+        
         
         let recipiesContainer: HTMLDivElement = <HTMLDivElement> document.getElementById("recepies");
         recipiesContainer.innerHTML = "";
@@ -140,8 +210,8 @@ namespace KMJ {
         
         if (rp.className != "recipe") {
             if (rp.id == "heart") {
-              rp.className = "fas fa-heart";  
-              return;
+                rp.className = "fas fa-heart";  
+                return;
             } else {
                 if (rp.parentElement.className == "recipe") {
                     rp = rp.parentElement;
@@ -183,7 +253,7 @@ namespace KMJ {
         }
         console.log(filters);
         
-        getRecipes(filters, "ALL");
+        getRecipes(filters, sessionStorage.currentP);
     }
     
     

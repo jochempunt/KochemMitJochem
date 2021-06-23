@@ -257,6 +257,27 @@ main .fa-heart{
     color: rgb(17, 54, 163); 
 }
 
+.fa-plus-circle{
+    position:fixed;
+    right: 10%;
+    top: 200px;
+    font-size: 2.5em;
+    color:rgb(17, 54, 163) ;
+
+}
+
+#createIcon{
+    display:inline;
+}
+
+#createIcon:hover{
+    cursor: pointer;
+}
+
+
+#createIconHidden{
+    display: none;
+}
 
 @media screen and (min-width:773px){
     h1{
