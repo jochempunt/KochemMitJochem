@@ -2,43 +2,43 @@ namespace KMJ {
     
     
     
-
- ///-------------TO-DO-----------------------------////
-/*
-
-- fontawesome auswechseln mit wahren SVGs davon
-- gestaltung create/edit seite
-
--editierung--> rezept hineinladen
-
-
-- Favorisierung
-
-- editierung & löschung von rezepten
-
-
-- serveranbindung
-
-- datenbankanbindung
-
-
--user creation & login datenbank
-
--rezept datenbank 
-
-
-
-
-*/  
-
-
-
-
-
-
-
-
-
+    
+    ///-------------TO-DO-----------------------------////
+    /*
+    
+    - fontawesome auswechseln mit wahren SVGs davon
+    - gestaltung create/edit seite
+    
+    -editierung--> rezept hineinladen
+    
+    
+    - Favorisierung
+    
+    - editierung & löschung von rezepten
+    
+    
+    - serveranbindung
+    
+    - datenbankanbindung
+    
+    
+    -user creation & login datenbank
+    
+    -rezept datenbank 
+    
+    
+    
+    
+    */  
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     document.getElementById("createIconHidden").addEventListener("click", createRecipe);
     
@@ -51,9 +51,19 @@ namespace KMJ {
     
     
     
-    
+    let user:User = undefined;
     if (!sessionStorage.user) {
         window.location.href = "./login.html";
+    } else {
+        // find user from database
+        
+        
+        for ( let iUser of users) {
+            if (iUser.name == sessionStorage.user ){
+                user = iUser;
+                break;
+            }
+        }
     }
     
     
@@ -63,10 +73,10 @@ namespace KMJ {
     
     let navicons: NodeListOf<HTMLSpanElement>  = document.querySelectorAll(".iconContainer");
     for (let ico of navicons) {
-       
-            console.log(ico);
-            
-            ico.addEventListener("click", changePage);
+        
+        console.log(ico);
+        
+        ico.addEventListener("click", changePage);
         
         
     }
@@ -225,10 +235,47 @@ namespace KMJ {
             timeParagraph.innerText = recipe.duration;
             recipeContainer.appendChild(timeParagraph);
             
-            let heartIcon: HTMLElement = document.createElement("i");
+            // das dynamische erstellen von SVG ::
+            
+            
+            
+            let favorised: boolean = false;
+            
+            if (user.favorites.includes(recipe.title)) {
+                favorised = true;
+            }
+            
+            
+           
+            if (_page == "MYRECIPES") {
+                let deleteIcon: HTMLImageElement = document.createElement("img");
+                deleteIcon.src = "../images/trash.svg";
+                deleteIcon.className = "heartIcon";
+                recipeContainer.appendChild(deleteIcon);
+
+                let editIcon: HTMLImageElement = document.createElement("img");
+                editIcon.src = "../images/edit.svg";
+                editIcon.className = "heartIcon";
+                recipeContainer.appendChild(editIcon);
+
+            }
+
+            let heartimg: HTMLImageElement = document.createElement("img");
+            if (favorised) {
+                heartimg.src = "../images/heart.svg";
+            } else {
+                heartimg.src = "../images/heartOutline.svg";
+            }
+
+            
+            
+            heartimg.className = "heartIcon";
+            recipeContainer.appendChild(heartimg);
+            
+            /* let heartIcon: HTMLElement = document.createElement("i");
             heartIcon.className = "far fa-heart";
             heartIcon.id = "heart";
-            recipeContainer.appendChild(heartIcon);
+            recipeContainer.appendChild(heartIcon);*/
             
             let authorParagraph: HTMLParagraphElement = document.createElement("p");
             authorParagraph.innerHTML = "<i>" + recipe.author + "</i>";

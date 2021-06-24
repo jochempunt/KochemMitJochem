@@ -102,6 +102,25 @@ form{
     fill: rgb(253, 93, 93);
 }
 
+.createIco svg{
+    width: 2.5em;
+    fill:rgb(71, 107, 214);
+}
+
+.createIco{
+    display: inline;
+    position: fixed;
+    top: 200px;
+    right: 10%;
+
+}
+.heartIcon{
+    width: auto;
+    height: 1.5em;
+    float: right;
+    margin-right: 1rem;
+}
+
 input[type="button"]{
     background-color: rgb(97, 162, 236);
     border: none;

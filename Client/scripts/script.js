@@ -32,8 +32,18 @@ var KMJ;
     function createRecipe() {
         window.location.href = "./create_edit.html";
     }
+    let user = undefined;
     if (!sessionStorage.user) {
         window.location.href = "./login.html";
+    }
+    else {
+        // find user from database
+        for (let iUser of KMJ.users) {
+            if (iUser.name == sessionStorage.user) {
+                user = iUser;
+                break;
+            }
+        }
     }
     let navicons = document.querySelectorAll(".iconContainer");
     for (let ico of navicons) {
@@ -148,10 +158,34 @@ var KMJ;
             timeParagraph.className = "time";
             timeParagraph.innerText = recipe.duration;
             recipeContainer.appendChild(timeParagraph);
-            let heartIcon = document.createElement("i");
+            // das dynamische erstellen von SVG ::
+            let favorised = false;
+            if (user.favorites.includes(recipe.title)) {
+                favorised = true;
+            }
+            if (_page == "MYRECIPES") {
+                let deleteIcon = document.createElement("img");
+                deleteIcon.src = "../images/trash.svg";
+                deleteIcon.className = "heartIcon";
+                recipeContainer.appendChild(deleteIcon);
+                let editIcon = document.createElement("img");
+                editIcon.src = "../images/edit.svg";
+                editIcon.className = "heartIcon";
+                recipeContainer.appendChild(editIcon);
+            }
+            let heartimg = document.createElement("img");
+            if (favorised) {
+                heartimg.src = "../images/heart.svg";
+            }
+            else {
+                heartimg.src = "../images/heartOutline.svg";
+            }
+            heartimg.className = "heartIcon";
+            recipeContainer.appendChild(heartimg);
+            /* let heartIcon: HTMLElement = document.createElement("i");
             heartIcon.className = "far fa-heart";
             heartIcon.id = "heart";
-            recipeContainer.appendChild(heartIcon);
+            recipeContainer.appendChild(heartIcon);*/
             let authorParagraph = document.createElement("p");
             authorParagraph.innerHTML = "<i>" + recipe.author + "</i>";
             recipeContainer.appendChild(authorParagraph);
