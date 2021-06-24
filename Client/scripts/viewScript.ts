@@ -2,7 +2,7 @@ namespace KMJ {
     if (!sessionStorage.user) {
         window.location.href = "./login.html";
     }
-    
+    let ingredientCount: number = 2; 
     
     let currentRecipe: Recipe = undefined; //vorArbeit für wenn ein rezept bearbeitet oder angezeigt werden soll
     if (sessionStorage.viewRecipeID != "") {     // angeklicktes/ausgewähltes rezept wird aus der datenbank geladen
@@ -58,12 +58,74 @@ namespace KMJ {
         directionP.innerText = currentRecipe.directions;
     } else if (window.location.href.includes("create_edit")) {
         
+        console.log(sessionStorage.editRecipeId);
+        
+        if (sessionStorage.editRecipeId != "") {     // angeklicktes/ausgewähltes rezept wird aus der datenbank geladen
+            console.log(sessionStorage.editRecipeId);
+            for (let recipe of recipes) {
+                if (recipe.title == sessionStorage.editRecipeId) {
+                    currentRecipe = recipe;
+                    
+                    
+                    
+                    let title: HTMLInputElement = <HTMLInputElement> document.getElementById("title");
+                    title.value = currentRecipe.title;
+                    
+                    let duration: HTMLInputElement = <HTMLInputElement> document.getElementById("durations");
+                    duration.value = currentRecipe.duration;
+                    
+                    let selectCourse: HTMLInputElement = <HTMLInputElement> document.getElementById("select");
+                    selectCourse.value = currentRecipe.course;
+                    
+                    let portion: HTMLInputElement = <HTMLInputElement> document.getElementById("portions");
+                    portion.value = currentRecipe.portions.toString();
+                    
+                    /* let title: HTMLInputElement = <HTMLInputElement> document.getElementById("title");
+                    title.value = currentRecipe.title;
+                    */
+                    let directions: HTMLTextAreaElement = <HTMLTextAreaElement> document.getElementById("directions");
+                    directions.value = currentRecipe.directions;
+                    
+                    
+                    
+                    
+                    let ingredientCount: number = currentRecipe.ingredients.length;
+                    
+                    for (let i: number = 0; i < ingredientCount; i ++) {
+                        if (i >= 2) { //es sind immer mindestens 2 lehre ingredient felder auf der seite
+                            addIngredientField();
+                            
+                        } 
+                        
+                        let amountInput: HTMLInputElement = <HTMLInputElement> document.getElementById("Amount" + i);
+                        amountInput.value = currentRecipe.ingredients[i].amount;
+                        let ingredientInput: HTMLInputElement  = <HTMLInputElement>document.getElementById("IngredientName" + i);
+                        ingredientInput.value = currentRecipe.ingredients[i].name;
+                        
+                        
+                        
+                    }
+                    
+                    
+                    
+                    
+                }
+            }
+        }
+        
+        
+        
+        
+        
+        
+        
+        
         let finishButton: HTMLDivElement = <HTMLDivElement> document.getElementById("finishButtonMobile");
         finishButton.addEventListener("click", getRecipeOfForm);
         
         let plusIngredient: HTMLDivElement = <HTMLDivElement> document.getElementById("plusIngredient");
         plusIngredient.addEventListener("click", addIngredientField);
-        let ingredientCount: number = 2; 
+       
         
         
         
@@ -89,8 +151,8 @@ namespace KMJ {
             console.log(newRecipe);
             return newRecipe;
     }   
-
-
+    
+    
         function addIngredientField(): void {
         
         
@@ -98,8 +160,8 @@ namespace KMJ {
         let newIngredientAmount: HTMLInputElement = document.createElement("input");
         newIngredientAmount.type = "text";
         newIngredientAmount.className = "amount";
-        newIngredientAmount.id = "Amount" ;
-        newIngredientAmount.name = "Amount" ;
+        newIngredientAmount.id = "Amount" + ingredientCount ;
+        newIngredientAmount.name = "Amount"+ ingredientCount ;
         newIngredientAmount.placeholder = "Amount";
         
         let newIngridientName: HTMLInputElement = document.createElement("input");

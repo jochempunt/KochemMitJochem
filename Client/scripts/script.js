@@ -30,6 +30,7 @@ var KMJ;
     */
     document.getElementById("createIconHidden").addEventListener("click", createRecipe);
     function createRecipe() {
+        sessionStorage.editRecipeId = "";
         window.location.href = "./create_edit.html";
     }
     let user = undefined;
@@ -193,7 +194,6 @@ var KMJ;
     //----------------------------------------view Recipe------------//
     function viewRecipe(_event) {
         let rp = _event.target;
-        sessionStorage.viewRecipeId = rp.dataset.recipeId;
         console.log(sessionStorage.viewRecipeId);
         if (rp.className != "recipe") {
             if (rp.className == "recipeControllIcon") {
@@ -202,6 +202,7 @@ var KMJ;
                     return;
                 }
                 else if (ctrImage.src.includes("edit")) {
+                    sessionStorage.editRecipeId = rp.parentElement.dataset.recipeId;
                     window.location.href = "./create_edit.html";
                 }
                 else if (ctrImage.src.includes("trash")) {
@@ -222,6 +223,7 @@ var KMJ;
                 else {
                     rp = rp.parentElement.parentElement;
                 }
+                sessionStorage.viewRecipeId = rp.dataset.recipeId;
                 window.location.href = "view.html";
             }
         }

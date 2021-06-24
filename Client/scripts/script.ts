@@ -43,6 +43,7 @@ namespace KMJ {
     document.getElementById("createIconHidden").addEventListener("click", createRecipe);
     
     function createRecipe(): void {
+        sessionStorage.editRecipeId = "";
         window.location.href = "./create_edit.html";
     }
     
@@ -295,7 +296,7 @@ namespace KMJ {
     
     function viewRecipe(_event: Event): void {
         let rp: HTMLElement = <HTMLDivElement> _event.target;
-        sessionStorage.viewRecipeId = rp.dataset.recipeId;
+        
         console.log(sessionStorage.viewRecipeId);
         if (rp.className != "recipe") {
             if (rp.className == "recipeControllIcon") {
@@ -303,6 +304,7 @@ namespace KMJ {
                 if (ctrImage.src.includes("heart")) {
                     return;
                 } else if (ctrImage.src.includes("edit")) {
+                    sessionStorage.editRecipeId = rp.parentElement.dataset.recipeId;
                     window.location.href = "./create_edit.html";
                 } else if (ctrImage.src.includes("trash")) {
                      //ok/cancel dialog ob jemand wirklich rezept löschen will oder nicht
@@ -321,6 +323,7 @@ namespace KMJ {
                 } else {
                     rp = rp.parentElement.parentElement;
                 }
+                sessionStorage.viewRecipeId = rp.dataset.recipeId;
                 window.location.href = "view.html";
             }
         }
