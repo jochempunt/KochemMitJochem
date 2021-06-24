@@ -2,6 +2,43 @@ namespace KMJ {
     
     
     
+
+ ///-------------TO-DO-----------------------------////
+/*
+
+- fontawesome auswechseln mit wahren SVGs davon
+- gestaltung create/edit seite
+
+-editierung--> rezept hineinladen
+
+
+- Favorisierung
+
+- editierung & löschung von rezepten
+
+
+- serveranbindung
+
+- datenbankanbindung
+
+
+-user creation & login datenbank
+
+-rezept datenbank 
+
+
+
+
+*/  
+
+
+
+
+
+
+
+
+
     
     document.getElementById("createIconHidden").addEventListener("click", createRecipe);
     
@@ -24,11 +61,13 @@ namespace KMJ {
     
     
     
-    let navicons: NodeListOf<HTMLElement>  = document.querySelectorAll("nav i");
+    let navicons: NodeListOf<HTMLSpanElement>  = document.querySelectorAll(".iconContainer");
     for (let ico of navicons) {
-        if (ico.id) {
+       
+            console.log(ico);
+            
             ico.addEventListener("click", changePage);
-        }
+        
         
     }
     
@@ -37,10 +76,10 @@ namespace KMJ {
     
     switch (sessionStorage.currentP) {
         case "FAVORITES":
-        document.getElementById("faveIcon").click();
+        document.getElementById("faveIconSpan").click();
         break;
         case "MYRECIPES":
-        document.getElementById("myIcon").click();
+        document.getElementById("myIconSpan").click();
         
         if (document.getElementById("createIconHidden")) {
             document.getElementById("createIconHidden").id = "createIcon";
@@ -51,7 +90,7 @@ namespace KMJ {
         
         break;
         default:
-        document.getElementById("allIcon").click();
+        document.getElementById("allIconSpan").click();
         break;
     }
     
@@ -60,11 +99,15 @@ namespace KMJ {
     
     function changePage(_event: Event): void {
         let siteTitle: HTMLHeadingElement = <HTMLHeadingElement> document.getElementById("site_title");
-        let icon: HTMLHtmlElement = undefined;
+        let icon: HTMLSpanElement = undefined;
         
-        let clickedIcon: HTMLElement = <HTMLElement>_event.target;
+        let clickedIcon: HTMLSpanElement = <HTMLSpanElement>    _event.target;
+        
+        
+        
         let pageId: string = clickedIcon.id;
         
+        console.log(pageId);
         if (sessionStorage.currentP == "MYRECIPES") {
             if (document.getElementById("createIcon")) {
                 
@@ -75,27 +118,30 @@ namespace KMJ {
         
         
         switch (pageId) {
-            case "allIcon":
+            case "allIconSpan":
             siteTitle.innerText = "All Recipes";
-            icon = <HTMLHtmlElement> document.getElementById("allIcon");
+            icon = <HTMLElement> document.getElementById("allIconSpan");
+            console.log("allicon-- " + icon);
             sessionStorage.currentP = "ALL";
             break;
-            case "faveIcon":
+            case "faveIconSpan":
             siteTitle.innerText = "My Favorites";
-            icon = <HTMLHtmlElement> document.getElementById("faveIcon");
+            icon = <HTMLSpanElement> document.getElementById("faveIconSpan");
             sessionStorage.currentP = "FAVORITES";
+            console.log("fave-- " + icon);
             break;
-            case "myIcon":
+            case "myIconSpan":
             siteTitle.innerText = "My Recipes";
             sessionStorage.currentP = "MYRECIPES";
             if ( document.getElementById("createIconHidden")) {
                 document.getElementById("createIconHidden").id = "createIcon";
             }
+            console.log("my-- " + icon);
             
-            
-            icon = <HTMLHtmlElement> document.getElementById("myIcon");
+            icon =  <HTMLSpanElement> document.getElementById("myIconSpan");
             break;
         }
+        
         for (let ico of navicons) {
             ico.className = ico.className.replace("currentIcon", "");
         }    

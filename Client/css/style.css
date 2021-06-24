@@ -98,6 +98,10 @@ form{
     color: rgb(253, 93, 93);
 }
 
+.currentIcon svg{
+    fill: rgb(253, 93, 93);
+}
+
 input[type="button"]{
     background-color: rgb(97, 162, 236);
     border: none;
@@ -274,6 +278,24 @@ main .fa-heart{
     cursor: pointer;
 }
 
+
+path{
+    pointer-events: none;
+}
+
+svg{
+    pointer-events: none;
+}
+
+.iconContainer{
+    display: flex;
+}
+
+.svgIcon{
+    stroke: white;
+    width: 2em;
+    fill: white;
+}
 
 #createIconHidden{
     display: none;

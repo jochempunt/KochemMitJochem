@@ -1,6 +1,33 @@
 "use strict";
 var KMJ;
 (function (KMJ) {
+    ///-------------TO-DO-----------------------------////
+    /*
+    
+    - fontawesome auswechseln mit wahren SVGs davon
+    - gestaltung create/edit seite
+    
+    -editierung--> rezept hineinladen
+    
+    
+    - Favorisierung
+    
+    - editierung & löschung von rezepten
+    
+    
+    - serveranbindung
+    
+    - datenbankanbindung
+    
+    
+    -user creation & login datenbank
+    
+    -rezept datenbank
+    
+    
+    
+    
+    */
     document.getElementById("createIconHidden").addEventListener("click", createRecipe);
     function createRecipe() {
         window.location.href = "./create_edit.html";
@@ -8,25 +35,24 @@ var KMJ;
     if (!sessionStorage.user) {
         window.location.href = "./login.html";
     }
-    let navicons = document.querySelectorAll("nav i");
+    let navicons = document.querySelectorAll(".iconContainer");
     for (let ico of navicons) {
-        if (ico.id) {
-            ico.addEventListener("click", changePage);
-        }
+        console.log(ico);
+        ico.addEventListener("click", changePage);
     }
     console.log(sessionStorage.currentP);
     switch (sessionStorage.currentP) {
         case "FAVORITES":
-            document.getElementById("faveIcon").click();
+            document.getElementById("faveIconSpan").click();
             break;
         case "MYRECIPES":
-            document.getElementById("myIcon").click();
+            document.getElementById("myIconSpan").click();
             if (document.getElementById("createIconHidden")) {
                 document.getElementById("createIconHidden").id = "createIcon";
             }
             break;
         default:
-            document.getElementById("allIcon").click();
+            document.getElementById("allIconSpan").click();
             break;
     }
     function changePage(_event) {
@@ -34,29 +60,33 @@ var KMJ;
         let icon = undefined;
         let clickedIcon = _event.target;
         let pageId = clickedIcon.id;
+        console.log(pageId);
         if (sessionStorage.currentP == "MYRECIPES") {
             if (document.getElementById("createIcon")) {
                 document.getElementById("createIcon").id = "createIconHidden";
             }
         }
         switch (pageId) {
-            case "allIcon":
+            case "allIconSpan":
                 siteTitle.innerText = "All Recipes";
-                icon = document.getElementById("allIcon");
+                icon = document.getElementById("allIconSpan");
+                console.log("allicon-- " + icon);
                 sessionStorage.currentP = "ALL";
                 break;
-            case "faveIcon":
+            case "faveIconSpan":
                 siteTitle.innerText = "My Favorites";
-                icon = document.getElementById("faveIcon");
+                icon = document.getElementById("faveIconSpan");
                 sessionStorage.currentP = "FAVORITES";
+                console.log("fave-- " + icon);
                 break;
-            case "myIcon":
+            case "myIconSpan":
                 siteTitle.innerText = "My Recipes";
                 sessionStorage.currentP = "MYRECIPES";
                 if (document.getElementById("createIconHidden")) {
                     document.getElementById("createIconHidden").id = "createIcon";
                 }
-                icon = document.getElementById("myIcon");
+                console.log("my-- " + icon);
+                icon = document.getElementById("myIconSpan");
                 break;
         }
         for (let ico of navicons) {
