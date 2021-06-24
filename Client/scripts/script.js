@@ -158,7 +158,6 @@ var KMJ;
             timeParagraph.className = "time";
             timeParagraph.innerText = recipe.duration;
             recipeContainer.appendChild(timeParagraph);
-            // das dynamische erstellen von SVG ::
             let favorised = false;
             if (user.favorites.includes(recipe.title)) {
                 favorised = true;
@@ -166,11 +165,11 @@ var KMJ;
             if (_page == "MYRECIPES") {
                 let deleteIcon = document.createElement("img");
                 deleteIcon.src = "../images/trash.svg";
-                deleteIcon.className = "heartIcon";
+                deleteIcon.className = "recipeControllIcon";
                 recipeContainer.appendChild(deleteIcon);
                 let editIcon = document.createElement("img");
                 editIcon.src = "../images/edit.svg";
-                editIcon.className = "heartIcon";
+                editIcon.className = "recipeControllIcon";
                 recipeContainer.appendChild(editIcon);
             }
             let heartimg = document.createElement("img");
@@ -180,12 +179,8 @@ var KMJ;
             else {
                 heartimg.src = "../images/heartOutline.svg";
             }
-            heartimg.className = "heartIcon";
+            heartimg.className = "recipeControllIcon";
             recipeContainer.appendChild(heartimg);
-            /* let heartIcon: HTMLElement = document.createElement("i");
-            heartIcon.className = "far fa-heart";
-            heartIcon.id = "heart";
-            recipeContainer.appendChild(heartIcon);*/
             let authorParagraph = document.createElement("p");
             authorParagraph.innerHTML = "<i>" + recipe.author + "</i>";
             recipeContainer.appendChild(authorParagraph);
@@ -198,10 +193,27 @@ var KMJ;
     //----------------------------------------view Recipe------------//
     function viewRecipe(_event) {
         let rp = _event.target;
+        sessionStorage.viewRecipeId = rp.dataset.recipeId;
+        console.log(sessionStorage.viewRecipeId);
         if (rp.className != "recipe") {
-            if (rp.id == "heart") {
-                rp.className = "fas fa-heart";
-                return;
+            if (rp.className == "recipeControllIcon") {
+                let ctrImage = rp;
+                if (ctrImage.src.includes("heart")) {
+                    return;
+                }
+                else if (ctrImage.src.includes("edit")) {
+                    window.location.href = "./create_edit.html";
+                }
+                else if (ctrImage.src.includes("trash")) {
+                    //ok/cancel dialog ob jemand wirklich rezept löschen will oder nicht
+                    if (confirm("are you sure you want to delete this recipe?")) {
+                        console.log("ja");
+                    }
+                    else {
+                        console.log("nein");
+                    }
+                    return;
+                }
             }
             else {
                 if (rp.parentElement.className == "recipe") {
@@ -210,12 +222,10 @@ var KMJ;
                 else {
                     rp = rp.parentElement.parentElement;
                 }
+                window.location.href = "view.html";
             }
         }
         //
-        sessionStorage.viewRecipeId = rp.dataset.recipeId;
-        console.log(sessionStorage.viewRecipeId);
-        window.location.href = "view.html";
     }
     // --------------------------------------- filtersearch --------//
     document.getElementById("submitFilters").addEventListener("click", filterSearch);

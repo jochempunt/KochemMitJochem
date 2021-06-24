@@ -112,9 +112,8 @@ form{
     position: fixed;
     top: 200px;
     right: 10%;
-
 }
-.heartIcon{
+.recipeControllIcon{
     width: auto;
     height: 1.5em;
     float: right;

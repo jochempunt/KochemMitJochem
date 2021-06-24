@@ -51,7 +51,7 @@ namespace KMJ {
     
     
     
-    let user:User = undefined;
+    let user: User = undefined;
     if (!sessionStorage.user) {
         window.location.href = "./login.html";
     } else {
@@ -59,7 +59,7 @@ namespace KMJ {
         
         
         for ( let iUser of users) {
-            if (iUser.name == sessionStorage.user ){
+            if (iUser.name == sessionStorage.user ) {
                 user = iUser;
                 break;
             }
@@ -235,8 +235,7 @@ namespace KMJ {
             timeParagraph.innerText = recipe.duration;
             recipeContainer.appendChild(timeParagraph);
             
-            // das dynamische erstellen von SVG ::
-            
+         
             
             
             let favorised: boolean = false;
@@ -250,12 +249,12 @@ namespace KMJ {
             if (_page == "MYRECIPES") {
                 let deleteIcon: HTMLImageElement = document.createElement("img");
                 deleteIcon.src = "../images/trash.svg";
-                deleteIcon.className = "heartIcon";
+                deleteIcon.className = "recipeControllIcon";
                 recipeContainer.appendChild(deleteIcon);
 
                 let editIcon: HTMLImageElement = document.createElement("img");
                 editIcon.src = "../images/edit.svg";
-                editIcon.className = "heartIcon";
+                editIcon.className = "recipeControllIcon";
                 recipeContainer.appendChild(editIcon);
 
             }
@@ -269,14 +268,10 @@ namespace KMJ {
 
             
             
-            heartimg.className = "heartIcon";
+            heartimg.className = "recipeControllIcon";
             recipeContainer.appendChild(heartimg);
             
-            /* let heartIcon: HTMLElement = document.createElement("i");
-            heartIcon.className = "far fa-heart";
-            heartIcon.id = "heart";
-            recipeContainer.appendChild(heartIcon);*/
-            
+          
             let authorParagraph: HTMLParagraphElement = document.createElement("p");
             authorParagraph.innerHTML = "<i>" + recipe.author + "</i>";
             recipeContainer.appendChild(authorParagraph);
@@ -300,24 +295,39 @@ namespace KMJ {
     
     function viewRecipe(_event: Event): void {
         let rp: HTMLElement = <HTMLDivElement> _event.target;
-        
+        sessionStorage.viewRecipeId = rp.dataset.recipeId;
+        console.log(sessionStorage.viewRecipeId);
         if (rp.className != "recipe") {
-            if (rp.id == "heart") {
-                rp.className = "fas fa-heart";  
-                return;
+            if (rp.className == "recipeControllIcon") {
+                let ctrImage:  HTMLImageElement = <HTMLImageElement> rp;
+                if (ctrImage.src.includes("heart")) {
+                    return;
+                } else if (ctrImage.src.includes("edit")) {
+                    window.location.href = "./create_edit.html";
+                } else if (ctrImage.src.includes("trash")) {
+                     //ok/cancel dialog ob jemand wirklich rezept löschen will oder nicht
+                    if (confirm("are you sure you want to delete this recipe?")){
+                        console.log("ja");
+                    } else {
+                        console.log("nein");
+                    }
+                   
+
+                    return;
+                }
             } else {
                 if (rp.parentElement.className == "recipe") {
                     rp = rp.parentElement;
                 } else {
                     rp = rp.parentElement.parentElement;
                 }
+                window.location.href = "view.html";
             }
         }
         //
         
-        sessionStorage.viewRecipeId = rp.dataset.recipeId;
-        console.log(sessionStorage.viewRecipeId);
-        window.location.href = "view.html";
+        
+      
         
     }   
     
