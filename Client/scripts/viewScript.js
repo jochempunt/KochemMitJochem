@@ -30,11 +30,11 @@ var KMJ;
         let portions = document.getElementById("portionNumber");
         portions.innerText = "" + currentRecipe.portions;
         let ingredientList = document.getElementById("ingredient-list");
-        for (let ingredient of currentRecipe.ingredients) {
+        for (let i = 0; i < currentRecipe.ingredientAmounts.length; i++) {
             let li = document.createElement("li");
             let emAmount = document.createElement("em");
-            emAmount.innerText = ingredient.amount;
-            let ingredientTextNode = document.createTextNode(" " + ingredient.name);
+            emAmount.innerText = currentRecipe.ingredientAmounts[i];
+            let ingredientTextNode = document.createTextNode(" " + currentRecipe.ingredientNames[i]);
             li.appendChild(emAmount);
             li.appendChild(ingredientTextNode);
             ingredientList.appendChild(li);
@@ -57,20 +57,19 @@ var KMJ;
                     selectCourse.value = currentRecipe.course;
                     let portion = document.getElementById("portions");
                     portion.value = currentRecipe.portions.toString();
-                    /* let title: HTMLInputElement = <HTMLInputElement> document.getElementById("title");
-                    title.value = currentRecipe.title;
-                    */
                     let directions = document.getElementById("directions");
                     directions.value = currentRecipe.directions;
-                    let ingredientCount = currentRecipe.ingredients.length;
+                    let ingredientCount = currentRecipe.ingredientAmounts.length;
                     for (let i = 0; i < ingredientCount; i++) {
                         if (i >= 2) { //es sind immer mindestens 2 lehre ingredient felder auf der seite
                             addIngredientField();
                         }
                         let amountInput = document.getElementById("Amount" + i);
-                        amountInput.value = currentRecipe.ingredients[i].amount;
+                        amountInput.value = currentRecipe.ingredientAmounts[i];
+                        //amountInput.value = currentRecipe.ingredients[i].amount;
                         let ingredientInput = document.getElementById("IngredientName" + i);
-                        ingredientInput.value = currentRecipe.ingredients[i].name;
+                        ingredientInput.value = currentRecipe.ingredientNames[i];
+                        // ingredientInput.value = currentRecipe.ingredients[i].name;
                     }
                 }
             }
@@ -79,13 +78,16 @@ var KMJ;
         finishButton.addEventListener("click", getRecipeOfForm);
         let plusIngredient = document.getElementById("plusIngredient");
         plusIngredient.addEventListener("click", addIngredientField);
-        function getRecipeOfForm() {
+        async function getRecipeOfForm() {
             let formdata = new FormData(document.forms[0]);
-            let ingredientList = [];
+            let ingredientNamelist = [];
+            let ingredientAmountlist = [];
             let i = 0;
             for (let fom of formdata.getAll("Amount")) {
-                let newIngredient = { amount: fom.toString(), name: formdata.get("IngredientName" + i).toString() };
-                ingredientList[ingredientList.length] = newIngredient;
+                let ingedientAmount = fom.toString();
+                let ingredientName = formdata.get("IngredientName" + i).toString();
+                ingredientAmountlist[ingredientAmountlist.length] = ingedientAmount;
+                ingredientNamelist[ingredientNamelist.length] = ingredientName;
                 i++;
             }
             let newRecipe = { title: formdata.get("recipeTitle").toString(),
@@ -94,10 +96,18 @@ var KMJ;
                 portions: Number(formdata.get("portions")),
                 directions: formdata.get("directions").toString(),
                 author: sessionStorage.user,
-                ingredients: ingredientList
+                ingredientAmounts: ingredientAmountlist,
+                ingredientNames: ingredientNamelist
             };
             console.log(newRecipe);
-            return newRecipe;
+            //.............................//
+            let url = "http://localhost:8100/createRecipe";
+            let query = new URLSearchParams(newRecipe);
+            url = url + "?" + query.toString();
+            let resp = await fetch(url);
+            let data = await resp.json();
+            console.log(data);
+            console.log(url);
         }
         function addIngredientField() {
             let newIngredientAmount = document.createElement("input");

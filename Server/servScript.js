@@ -16,6 +16,10 @@ var Server;
     function handleListen() {
         console.log("Listening");
     }
+    /*interface ServerResponse {
+        message: string;
+        error: string;
+    }*/
     function handleRequest(_request, _response) {
         _response.setHeader("Access-Control-Allow-Origin", "*");
         console.log("I hear voices!");

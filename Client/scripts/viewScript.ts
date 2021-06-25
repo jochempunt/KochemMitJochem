@@ -40,15 +40,13 @@ namespace KMJ {
         
         let ingredientList: HTMLUListElement = <HTMLUListElement> document.getElementById("ingredient-list");
         
-        
-        for (let ingredient of currentRecipe.ingredients) {
+        for (let i: number = 0; i < currentRecipe.ingredientAmounts.length; i++ ) {
             let li: HTMLLIElement = document.createElement("li");
             
             let emAmount: HTMLElement = document.createElement("em");
-            emAmount.innerText = ingredient.amount;
-            
-            let ingredientTextNode: Node = document.createTextNode(" " + ingredient.name);
-            
+            emAmount.innerText = currentRecipe.ingredientAmounts[i];
+
+            let ingredientTextNode: Node = document.createTextNode(" " + currentRecipe.ingredientNames[i]);
             li.appendChild(emAmount);
             li.appendChild(ingredientTextNode);
             ingredientList.appendChild(li);
@@ -66,8 +64,6 @@ namespace KMJ {
                 if (recipe.title == sessionStorage.editRecipeId) {
                     currentRecipe = recipe;
                     
-                    
-                    
                     let title: HTMLInputElement = <HTMLInputElement> document.getElementById("title");
                     title.value = currentRecipe.title;
                     
@@ -80,16 +76,10 @@ namespace KMJ {
                     let portion: HTMLInputElement = <HTMLInputElement> document.getElementById("portions");
                     portion.value = currentRecipe.portions.toString();
                     
-                    /* let title: HTMLInputElement = <HTMLInputElement> document.getElementById("title");
-                    title.value = currentRecipe.title;
-                    */
                     let directions: HTMLTextAreaElement = <HTMLTextAreaElement> document.getElementById("directions");
                     directions.value = currentRecipe.directions;
                     
-                    
-                    
-                    
-                    let ingredientCount: number = currentRecipe.ingredients.length;
+                    let ingredientCount: number = currentRecipe.ingredientAmounts.length;
                     
                     for (let i: number = 0; i < ingredientCount; i ++) {
                         if (i >= 2) { //es sind immer mindestens 2 lehre ingredient felder auf der seite
@@ -98,45 +88,41 @@ namespace KMJ {
                         } 
                         
                         let amountInput: HTMLInputElement = <HTMLInputElement> document.getElementById("Amount" + i);
-                        amountInput.value = currentRecipe.ingredients[i].amount;
+                        amountInput.value = currentRecipe.ingredientAmounts[i];
+                        //amountInput.value = currentRecipe.ingredients[i].amount;
                         let ingredientInput: HTMLInputElement  = <HTMLInputElement>document.getElementById("IngredientName" + i);
-                        ingredientInput.value = currentRecipe.ingredients[i].name;
-                        
-                        
-                        
+                        ingredientInput.value = currentRecipe.ingredientNames[i];
+                        // ingredientInput.value = currentRecipe.ingredients[i].name;
                     }
-                    
-                    
-                    
-                    
                 }
             }
         }
         
         
-        
-        
-        
-        
-        
-        
+
+
         let finishButton: HTMLDivElement = <HTMLDivElement> document.getElementById("finishButtonMobile");
         finishButton.addEventListener("click", getRecipeOfForm);
         
         let plusIngredient: HTMLDivElement = <HTMLDivElement> document.getElementById("plusIngredient");
         plusIngredient.addEventListener("click", addIngredientField);
        
-        
-        
-        
-        function getRecipeOfForm(): Recipe {
+        async function getRecipeOfForm(): Promise<void> {
             let formdata: FormData = new FormData(document.forms[0]);
-            let ingredientList: Ingredient[] = [];
             
+            
+
+            let ingredientNamelist: string[] = [];
+
+            let ingredientAmountlist: string[] = [];
+
+
             let i: number = 0;
             for (let fom of formdata.getAll("Amount")) {
-                let newIngredient: Ingredient = {amount: fom.toString(), name: formdata.get("IngredientName" + i).toString()};
-                ingredientList[ingredientList.length] = newIngredient;
+                let ingedientAmount: string =  fom.toString() ;
+                let ingredientName: string = formdata.get("IngredientName" + i).toString();
+                ingredientAmountlist[ingredientAmountlist.length] = ingedientAmount;
+                ingredientNamelist[ingredientNamelist.length] = ingredientName;
                 i++; 
             } 
             
@@ -146,10 +132,27 @@ namespace KMJ {
             portions: Number(formdata.get("portions")),
             directions: formdata.get("directions").toString(),
             author: sessionStorage.user,
-            ingredients: ingredientList
+            ingredientAmounts: ingredientAmountlist,
+            ingredientNames: ingredientNamelist
         };
             console.log(newRecipe);
-            return newRecipe;
+          
+
+
+        //.............................//
+
+           
+            let url: string = "http://localhost:8100/createRecipe";
+            let query: URLSearchParams = new URLSearchParams(<any>newRecipe);
+            url = url + "?" + query.toString();
+            let resp: Response = await fetch(url);
+            let data: Recipe = await resp.json();
+            console.log(data);
+            console.log(url);
+            
+
+
+
     }   
     
     

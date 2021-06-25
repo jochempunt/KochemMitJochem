@@ -15,6 +15,12 @@ export namespace Server {
         console.log("Listening");
     }
 
+    /*interface ServerResponse {
+        message: string;
+        error: string;
+    }*/
+
+
 
     function handleRequest(_request: Http.IncomingMessage, _response: Http.ServerResponse): void {
         
