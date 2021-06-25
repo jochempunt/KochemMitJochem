@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "node ./Server/servScript.js"
+    "test": "node ./Server/servScript.js",
+    "start":"node ./Server/servScript.js"
   },
   "author": "jochem punt",
   "license": "ISC",

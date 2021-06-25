@@ -17,6 +17,7 @@ var Server;
         console.log("Listening");
     }
     function handleRequest(_request, _response) {
+        _response.setHeader("Access-Control-Allow-Origin", "*");
         console.log("I hear voices!");
         let reqUrl = url.parse(_request.url, true);
         switch (reqUrl.pathname) {
@@ -35,7 +36,6 @@ var Server;
             case "findRecipes":
                 break;
         }
-        _response.setHeader("Access-Control-Allow-Origin", "*");
         _response.end();
     }
 })(Server = exports.Server || (exports.Server = {}));

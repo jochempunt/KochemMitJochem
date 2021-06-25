@@ -17,9 +17,9 @@ export namespace Server {
 
 
     function handleRequest(_request: Http.IncomingMessage, _response: Http.ServerResponse): void {
+        
+        _response.setHeader("Access-Control-Allow-Origin", "*");
         console.log("I hear voices!");
-        
-        
         let reqUrl: url.UrlWithParsedQuery = url.parse(_request.url, true);
         
         switch (reqUrl.pathname) {
@@ -43,7 +43,7 @@ export namespace Server {
 
         
         
-        _response.setHeader("Access-Control-Allow-Origin", "*");
+      
        
         _response.end();
     }
