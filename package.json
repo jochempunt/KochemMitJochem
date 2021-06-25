@@ -1,0 +1,14 @@
+{
+  "name": "kochem-mit-jochem",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "node ./Server/servScript.js"
+  },
+  "author": "jochem punt",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^15.12.4"
+  }
+}
