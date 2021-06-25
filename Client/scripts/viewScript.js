@@ -30,11 +30,11 @@ var KMJ;
         let portions = document.getElementById("portionNumber");
         portions.innerText = "" + currentRecipe.portions;
         let ingredientList = document.getElementById("ingredient-list");
-        for (let i = 0; i < currentRecipe.ingredientAmounts.length; i++) {
+        for (let i = 0; i < currentRecipe.ingredient_Amounts.length; i++) {
             let li = document.createElement("li");
             let emAmount = document.createElement("em");
-            emAmount.innerText = currentRecipe.ingredientAmounts[i];
-            let ingredientTextNode = document.createTextNode(" " + currentRecipe.ingredientNames[i]);
+            emAmount.innerText = currentRecipe.ingredient_Amounts[i];
+            let ingredientTextNode = document.createTextNode(" " + currentRecipe.ingredient_Names[i]);
             li.appendChild(emAmount);
             li.appendChild(ingredientTextNode);
             ingredientList.appendChild(li);
@@ -59,16 +59,16 @@ var KMJ;
                     portion.value = currentRecipe.portions.toString();
                     let directions = document.getElementById("directions");
                     directions.value = currentRecipe.directions;
-                    let ingredientCount = currentRecipe.ingredientAmounts.length;
+                    let ingredientCount = currentRecipe.ingredient_Amounts.length;
                     for (let i = 0; i < ingredientCount; i++) {
                         if (i >= 2) { //es sind immer mindestens 2 lehre ingredient felder auf der seite
                             addIngredientField();
                         }
                         let amountInput = document.getElementById("Amount" + i);
-                        amountInput.value = currentRecipe.ingredientAmounts[i];
+                        amountInput.value = currentRecipe.ingredient_Amounts[i];
                         //amountInput.value = currentRecipe.ingredients[i].amount;
                         let ingredientInput = document.getElementById("IngredientName" + i);
-                        ingredientInput.value = currentRecipe.ingredientNames[i];
+                        ingredientInput.value = currentRecipe.ingredient_Names[i];
                         // ingredientInput.value = currentRecipe.ingredients[i].name;
                     }
                 }
@@ -80,6 +80,11 @@ var KMJ;
         plusIngredient.addEventListener("click", addIngredientField);
         async function getRecipeOfForm() {
             let formdata = new FormData(document.forms[0]);
+            // grund warum ingredient kein eigenes interface mit 2 werten ist, eine solche verschachtelung
+            // würde durch Searchparams zu [object][object] umwandelnt dh habe ich mich für eine "flattend"/ 
+            //primitivere weise entschieden
+            /*let hah :Map<string,string> = new Map; <--  ... vllt doch lieber implementierun map?
+            hah.set("lol","ey");*/
             let ingredientNamelist = [];
             let ingredientAmountlist = [];
             let i = 0;
@@ -96,8 +101,8 @@ var KMJ;
                 portions: Number(formdata.get("portions")),
                 directions: formdata.get("directions").toString(),
                 author: sessionStorage.user,
-                ingredientAmounts: ingredientAmountlist,
-                ingredientNames: ingredientNamelist
+                ingredient_Amounts: ingredientAmountlist,
+                ingredient_Names: ingredientNamelist
             };
             console.log(newRecipe);
             //.............................//

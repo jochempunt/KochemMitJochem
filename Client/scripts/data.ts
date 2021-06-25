@@ -6,8 +6,8 @@ export interface Recipe {
     author: string;
     portions: number;
     duration: string;
-    ingredientAmounts: string[];
-    ingredientNames: string[];
+    ingredient_Amounts: string[];
+    ingredient_Names: string[];
     directions: string;
     course: string;
     
@@ -52,8 +52,8 @@ export let recipes: Recipe[] = [{
                                 portions: 2,
                                 duration: "12min",
                                 course: "main",
-                                ingredientAmounts: [ "3", "eine prise"],
-                                ingredientNames: [ "eier", "salz"],
+                                ingredient_Amounts: [ "3", "eine prise"],
+                                ingredient_Names: [ "eier", "salz"],
                                 /*ingredients: [
                                                 {amount: "3", name: "eier"},
                                                 {amount: "eine prise", name: "salz"}
@@ -64,16 +64,16 @@ export let recipes: Recipe[] = [{
                                 portions: 4,
                                 duration: "20min",
                                 course: "dessert",
-                                ingredientAmounts: [ "3", "200g", "130ml", "20g"],
-                                ingredientNames: [ "eier", "mehl", "milch", "butter"],
+                                ingredient_Amounts: [ "3", "200g", "130ml", "20g"],
+                                ingredient_Names: [ "eier", "mehl", "milch", "butter"],
                                 directions: "1. ei mit milch und mehl verrühren \n 2. butter in pfanne schmelzen \n 3. pfannkuchen backen bis leicht braun"},
                                 {title: "kuchen",
                                 author: "jochem",
                                 portions: 3,
                                 duration: "20min",
                                 course: "misc",
-                                ingredientAmounts: [ "3", "200g", "130ml", "20g"],
-                                ingredientNames: [ "eier", "mehl", "milch", "butter"],
+                                ingredient_Amounts: [ "3", "200g", "130ml", "20g"],
+                                ingredient_Names: [ "eier", "mehl", "milch", "butter"],
                                 directions: "1. ei mit milch und mehl verrühren \n 2. butter in pfanne schmelzen \n 3. pfannkuchen backen bis leicht braun"},
                                 {
                                     title: "ei mit spack",
@@ -81,8 +81,8 @@ export let recipes: Recipe[] = [{
                                     portions: 2,
                                     duration: "12min",
                                     course: "starter",
-                                    ingredientAmounts: [ "3", "eine prise"],
-                                    ingredientNames: [ "eier", "salz"],
+                                    ingredient_Amounts: [ "3", "eine prise"],
+                                    ingredient_Names: [ "eier", "salz"],
                                     directions: "1. ei in die pfanne \n 2. ei anbraten \n 3. salz hinzufügen"}
                                    
                                 ];

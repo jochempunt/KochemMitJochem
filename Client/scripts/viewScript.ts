@@ -1,3 +1,5 @@
+
+
 namespace KMJ {
     if (!sessionStorage.user) {
         window.location.href = "./login.html";
@@ -40,13 +42,13 @@ namespace KMJ {
         
         let ingredientList: HTMLUListElement = <HTMLUListElement> document.getElementById("ingredient-list");
         
-        for (let i: number = 0; i < currentRecipe.ingredientAmounts.length; i++ ) {
+        for (let i: number = 0; i < currentRecipe.ingredient_Amounts.length; i++ ) {
             let li: HTMLLIElement = document.createElement("li");
             
             let emAmount: HTMLElement = document.createElement("em");
-            emAmount.innerText = currentRecipe.ingredientAmounts[i];
+            emAmount.innerText = currentRecipe.ingredient_Amounts[i];
 
-            let ingredientTextNode: Node = document.createTextNode(" " + currentRecipe.ingredientNames[i]);
+            let ingredientTextNode: Node = document.createTextNode(" " + currentRecipe.ingredient_Names[i]);
             li.appendChild(emAmount);
             li.appendChild(ingredientTextNode);
             ingredientList.appendChild(li);
@@ -79,7 +81,7 @@ namespace KMJ {
                     let directions: HTMLTextAreaElement = <HTMLTextAreaElement> document.getElementById("directions");
                     directions.value = currentRecipe.directions;
                     
-                    let ingredientCount: number = currentRecipe.ingredientAmounts.length;
+                    let ingredientCount: number = currentRecipe.ingredient_Amounts.length;
                     
                     for (let i: number = 0; i < ingredientCount; i ++) {
                         if (i >= 2) { //es sind immer mindestens 2 lehre ingredient felder auf der seite
@@ -88,10 +90,10 @@ namespace KMJ {
                         } 
                         
                         let amountInput: HTMLInputElement = <HTMLInputElement> document.getElementById("Amount" + i);
-                        amountInput.value = currentRecipe.ingredientAmounts[i];
+                        amountInput.value = currentRecipe.ingredient_Amounts[i];
                         //amountInput.value = currentRecipe.ingredients[i].amount;
                         let ingredientInput: HTMLInputElement  = <HTMLInputElement>document.getElementById("IngredientName" + i);
-                        ingredientInput.value = currentRecipe.ingredientNames[i];
+                        ingredientInput.value = currentRecipe.ingredient_Names[i];
                         // ingredientInput.value = currentRecipe.ingredients[i].name;
                     }
                 }
@@ -110,7 +112,14 @@ namespace KMJ {
         async function getRecipeOfForm(): Promise<void> {
             let formdata: FormData = new FormData(document.forms[0]);
             
+            // grund warum ingredient kein eigenes interface mit 2 werten ist, eine solche verschachtelung
+            // würde durch Searchparams zu [object][object] umwandelnt dh habe ich mich für eine "flattend"/ 
+            //primitivere weise entschieden
             
+            
+            /*let hah :Map<string,string> = new Map; <--  ... vllt doch lieber implementierun map?
+            hah.set("lol","ey");*/
+
 
             let ingredientNamelist: string[] = [];
 
@@ -132,14 +141,18 @@ namespace KMJ {
             portions: Number(formdata.get("portions")),
             directions: formdata.get("directions").toString(),
             author: sessionStorage.user,
-            ingredientAmounts: ingredientAmountlist,
-            ingredientNames: ingredientNamelist
+            ingredient_Amounts: ingredientAmountlist,
+            ingredient_Names: ingredientNamelist
         };
             console.log(newRecipe);
           
 
 
         //.............................//
+
+            
+            
+
 
            
             let url: string = "http://localhost:8100/createRecipe";
