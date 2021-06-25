@@ -161,7 +161,7 @@ namespace KMJ {
         newIngredientAmount.type = "text";
         newIngredientAmount.className = "amount";
         newIngredientAmount.id = "Amount" + ingredientCount ;
-        newIngredientAmount.name = "Amount"+ ingredientCount ;
+        newIngredientAmount.name = "Amount" + ingredientCount ;
         newIngredientAmount.placeholder = "Amount";
         
         let newIngridientName: HTMLInputElement = document.createElement("input");

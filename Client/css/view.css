@@ -19,6 +19,14 @@ header{
     
     
 }
+
+
+#backIcon{
+    width: 1.5em;
+    float: left;
+    margin-top: 0.7em;
+    margin-left: 0.5rem;
+}
 h1{
     font-size: 2em;
 }
@@ -114,8 +122,16 @@ select{
     font-size: 1.3rem;
 }
 
+
+#plusIcon{
+    width: 1.2em;
+}
+
+
 #finishButtonMobile{
-    border-radius: 5em;
+    display: flex;
+    align-items: center;
+    border-radius: 10em;
     font-size: 1.5em;
     color: white;
     width: min-content;
@@ -175,9 +191,16 @@ select{
     h2{
         font-size: 1.8em;
     }
-    #back_cancel{
+    #cancel_back{
         margin-top:0.7rem ;
+        width: 1.5em;
+        float: left;
+        margin-left: 1rem;
+        cursor: pointer;
         
+    }
+    #done{
+        width: 1.5em;
     }
     
     .mittig{
