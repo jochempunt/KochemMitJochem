@@ -240,17 +240,19 @@ export namespace Server {
                     let user: User = await users.findOne({username: _user});
                     //console.log(user);
                     if (user) {
-                    if (user.favorites[0] != undefined) {
+                    if (user.favorites) {
                         for (let id of user.favorites ) {
-                            console.log("favorite id is:" + id);
+                            if (id != "") {
+                                console.log("favorite id is:" + id);
                             
-                            let recipeID: Mongo.ObjectId = new Mongo.ObjectId(id.toString());
+                                let recipeID: Mongo.ObjectId = new Mongo.ObjectId(id.toString());
                             //cursor = recipesCollection.find({_id: recipeID});
                             //console.log(cursor);
                             
-                            let tempRecipe: FullRecipe = await recipesCollection.findOne({_id: recipeID});
-                            if (tempRecipe) {
+                                let tempRecipe: FullRecipe = await recipesCollection.findOne({_id: recipeID});
+                                if (tempRecipe) {
                                 recipeArrayNoFilters[recipeArrayNoFilters.length] = tempRecipe;
+                                }
                             }
                         }
                        
