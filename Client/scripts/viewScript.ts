@@ -9,7 +9,7 @@ namespace KMJ {
     let currentRecipe: Recipe = undefined; //vorArbeit für wenn ein rezept bearbeitet oder angezeigt werden soll
     
     
-    export async function getOneRecipe(_searchID: string): Promise<void> {
+    async function getOneRecipe(_searchID: string): Promise<void> {
         let url: string = "http://localhost:8100/findOneRecipe";
         url = url + "?_id=" + _searchID ;
         let resp: Response = await fetch(url);

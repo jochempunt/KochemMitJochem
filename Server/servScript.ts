@@ -133,8 +133,9 @@ export namespace Server {
             break;
             
             case"/favoriteRecipe":
-            console.log("favorising recipe");
-            _response.write(favoriteRecipe( "recipeID", "username", false));
+            console.log("favorising recipe of " + username);
+            let id: string  = reqUrl.query["id"].toString();
+            _response.write(await favoriteRecipe( id, username));
             break;
             
             case"/findRecipes":
@@ -367,8 +368,41 @@ export namespace Server {
             return JSON.stringify(serverResponse);
         }
         
-        function favoriteRecipe(_recipeID: string, _username: string , _favor: boolean ): string {
-            return undefined;
+        async function favoriteRecipe(_recipeID: string, _username: string ): Promise<string> {
+            
+            
+            
+            let usersCollection: Mongo.Collection = mongoClient.db("KMJ").collection("Users");
+            let user: User = await  usersCollection.findOne({username: _username});
+
+            let isFavored: boolean = false;
+            let position: number = 0;
+            for (let favorite of user.favorites) {
+                if (favorite == _recipeID) {
+                    isFavored = true;
+                    break;
+                }
+                position++;
+            }
+
+            if (!isFavored) {
+                serverResponse = {message: "added favorite: " + _recipeID , error: undefined};
+                user.favorites[user.favorites.length] = _recipeID;
+               
+            } else {
+                serverResponse = {message: "deleted favorite: " + _recipeID , error: undefined};
+                user.favorites.splice(position, 1);
+            }
+            usersCollection.findOneAndUpdate({username: _username}, { $set: {favorites: user.favorites}});
+            
+
+
+
+
+            
+            
+            
+            return JSON.stringify(serverResponse);
         }
         
         

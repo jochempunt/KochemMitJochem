@@ -35,6 +35,8 @@ var KMJ;
         window.location.href = "./login.html";
     }
     else {
+        console.log(sessionStorage.user);
+        console.log("getUser");
         getuser(sessionStorage.user).then(main);
     }
     // find user from database
@@ -42,7 +44,7 @@ var KMJ;
         let url = "http://localhost:8100/getUser?" + "username=" + _username;
         let resp = await fetch(url);
         currentuser = await resp.json();
-        console.log(currentuser);
+        console.log("currentuser=" + currentuser.username);
     }
     function main() {
         let navicons = document.querySelectorAll(".iconContainer");
@@ -212,6 +214,12 @@ var KMJ;
                     let ctrImage = rp;
                     if (ctrImage.src.includes("heart")) {
                         console.log(rp.parentElement.dataset.recipeId);
+                        let url = "http://localhost:8100/favoriteRecipe?id=" + rp.parentElement.dataset.recipeId + "&username=" + currentuser.username;
+                        console.log(url);
+                        let resp = await fetch(url);
+                        let sR = await resp.json();
+                        console.log(sR.message);
+                        filterSearch();
                         return;
                     }
                     else if (ctrImage.src.includes("edit")) {
@@ -253,8 +261,9 @@ var KMJ;
         }
         // --------------------------------------- filtersearch --------//
         document.getElementById("submitFilters").addEventListener("click", filterSearch);
-        function filterSearch() {
+        async function filterSearch() {
             let filterform = new FormData(document.forms[0]);
+            await getuser(sessionStorage.user);
             let filters = [];
             for (let i = 1; i <= 4; i++) {
                 if (filterform.get("course" + i)) {

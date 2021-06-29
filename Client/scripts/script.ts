@@ -56,7 +56,9 @@ namespace KMJ {
     if (!sessionStorage.user) {
         window.location.href = "./login.html";
     } else {
+        console.log(sessionStorage.user);
         
+        console.log("getUser");
         getuser(sessionStorage.user).then(main);
         
     }
@@ -68,7 +70,7 @@ namespace KMJ {
         let url: string = "http://localhost:8100/getUser?" + "username=" + _username;
         let resp: Response = await fetch(url);
         currentuser = await resp.json();
-        console.log(currentuser);
+        console.log("currentuser=" + currentuser.username);
         
     }
     
@@ -337,9 +339,12 @@ namespace KMJ {
 
 
                         console.log(rp.parentElement.dataset.recipeId);
-
-
-
+                        let url: string = "http://localhost:8100/favoriteRecipe?id=" + rp.parentElement.dataset.recipeId + "&username=" + currentuser.username;
+                        console.log(url);
+                        let resp: Response = await fetch(url);
+                        let sR: ServerResponse = await resp.json();
+                        console.log(sR.message);
+                        filterSearch();
 
 
                         return;
@@ -396,10 +401,10 @@ namespace KMJ {
         document.getElementById("submitFilters").addEventListener("click", filterSearch);
         
         
-        function filterSearch(): void {
+        async function filterSearch(): Promise<void> {
             let filterform: FormData = new FormData(document.forms[0]);
             
-            
+            await getuser(sessionStorage.user);
             let filters: string[] = [];
             for (let i: number = 1; i <= 4; i++ ) {
                 if (filterform.get("course" + i)) {

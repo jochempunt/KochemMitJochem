@@ -64,8 +64,9 @@ var Server;
                 _response.write(await editRecipe(reqUrl.query));
                 break;
             case "/favoriteRecipe":
-                console.log("favorising recipe");
-                _response.write(favoriteRecipe("recipeID", "username", false));
+                console.log("favorising recipe of " + username);
+                let id = reqUrl.query["id"].toString();
+                _response.write(await favoriteRecipe(id, username));
                 break;
             case "/findRecipes":
                 console.log("find recipes");
@@ -225,8 +226,28 @@ var Server;
             serverResponse = { message: JSON.stringify(newRecipe) + " inserted", error: undefined };
             return JSON.stringify(serverResponse);
         }
-        function favoriteRecipe(_recipeID, _username, _favor) {
-            return undefined;
+        async function favoriteRecipe(_recipeID, _username) {
+            let usersCollection = mongoClient.db("KMJ").collection("Users");
+            let user = await usersCollection.findOne({ username: _username });
+            let isFavored = false;
+            let position = 0;
+            for (let favorite of user.favorites) {
+                if (favorite == _recipeID) {
+                    isFavored = true;
+                    break;
+                }
+                position++;
+            }
+            if (!isFavored) {
+                serverResponse = { message: "added favorite: " + _recipeID, error: undefined };
+                user.favorites[user.favorites.length] = _recipeID;
+            }
+            else {
+                serverResponse = { message: "deleted favorite: " + _recipeID, error: undefined };
+                user.favorites.splice(position, 1);
+            }
+            usersCollection.findOneAndUpdate({ username: _username }, { $set: { favorites: user.favorites } });
+            return JSON.stringify(serverResponse);
         }
     }
 })(Server = exports.Server || (exports.Server = {}));

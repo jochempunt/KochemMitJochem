@@ -3,12 +3,12 @@ var KMJ;
 (function (KMJ) {
     KMJ.users = [
         {
-            name: "testUser",
+            username: "testUser",
             pw: "1234",
             favorites: ["ei mit speck", "pfannenkuchen"]
         },
         {
-            name: "jochem",
+            username: "jochem",
             pw: "punt",
             favorites: ["kuchen", "ei mit spack"]
         }

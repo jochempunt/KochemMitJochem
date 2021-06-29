@@ -35,7 +35,7 @@ export interface Ingredient {
 
 
 export interface User {
-    name: string;
+    username: string;
     pw: string;
     favorites: string[];
 }
@@ -48,12 +48,12 @@ export interface User {
 
 export let users: User[] = [
                             {
-                                name: "testUser",
+                                username: "testUser",
                                 pw: "1234",
                                 favorites: ["ei mit speck", "pfannenkuchen"]
                             },
                             {
-                                name: "jochem",
+                                username: "jochem",
                                 pw: "punt",
                                 favorites: ["kuchen", "ei mit spack"]
                             }

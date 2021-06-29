@@ -12,7 +12,6 @@ var KMJ;
         let resp = await fetch(url);
         currentRecipe = await resp.json();
     }
-    KMJ.getOneRecipe = getOneRecipe;
     if (sessionStorage.viewRecipeID != "") { // angeklicktes/ausgewähltes rezept wird aus der datenbank geladen
         console.log(sessionStorage.viewRecipeId);
         getOneRecipe(sessionStorage.viewRecipeId).then(view);
