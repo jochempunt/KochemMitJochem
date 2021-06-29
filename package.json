@@ -5,11 +5,15 @@
   "main": "index.js",
   "scripts": {
     "test": "node ./Server/servScript.js",
-    "start":"node ./Server/servScript.js"
+    "start": "node ./Server/servScript.js"
   },
   "author": "jochem punt",
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^15.12.4"
+  },
+  "dependencies": {
+    "@types/mongodb": "^3.6.18",
+    "mongodb": "^3.6.9"
   }
 }

@@ -16,24 +16,43 @@ namespace KMJ {
     let disclaimerError: HTMLParagraphElement = <HTMLParagraphElement> document.getElementById("disclaimer");
 
 
-    function logIn(): void {
+
+
+    interface SendUser {
+        username: string;
+        password: string;
+    }
+
+    export interface ServerResponse {
+        message: string;
+        error: string;
+    }
+
+
+    async function logIn(): Promise<void> {
         let formdata: FormData = new FormData(document.forms[0]);
         if (noFieldsEmpty(formdata)) {
-            for (let user of users) {
-                if (formdata.get("username") == user.name) {
-                    if (formdata.get("password") == user.pw) {
-                        sessionStorage.user = user.name;
-                        disclaimerError.innerText = "Welcome " + user.name;
-                        window.location.href = "./Main.html";
-                        return;
-                    }
-                }
-    
-    
+            
+            let inputUsername: string = formdata.get("username").toString();
+
+            let user: SendUser = {username: inputUsername , password: formdata.get("password").toString()};
+            
+            
+            let url: string = "http://localhost:8100/logIn";
+            let query: URLSearchParams = new URLSearchParams(<any>user);
+            url = url + "?" + query.toString();
+            let resp: Response = await fetch(url);
+            let responseL: ServerResponse = await resp.json();
+            
+            if (responseL.error == undefined) {
+                console.log(responseL.message);
+                
+                sessionStorage.user = inputUsername;
+                disclaimerError.innerText = "Welcome " + inputUsername;
+                window.location.href = "./Main.html";
+            } else {
+                disclaimerError.innerText = responseL.error;
             }
-            disclaimerError.innerText = "username or password are wrong";
-        } else {
-            return;
         }
        
     }
@@ -51,14 +70,35 @@ namespace KMJ {
 
 
 
-    function signUp(): void {
+    async function signUp(): Promise<void> {
         let formdata: FormData = new FormData(document.forms[0]);
         if (noFieldsEmpty(formdata)) {
-            let username: string = formdata.get("username").toString();
+            let newUsername: string = formdata.get("username").toString();
             let pw: string = formdata.get("password").toString();
             let pwRepeat: string = formdata.get("rpPassword").toString();
             if (pw == pwRepeat) {
-                disclaimerError.innerText = "welcome " + username;
+                
+                let newUser: SendUser = {username: newUsername , password: pw};
+               
+               
+                let url: string = "http://localhost:8100/createUser";
+                let query: URLSearchParams = new URLSearchParams(<any>newUser);
+                url = url + "?" + query.toString();
+                let resp: Response = await fetch(url);
+                let responseL: ServerResponse = await resp.json();
+                
+                if (responseL.error == undefined) {
+                    console.log(responseL.message);
+                    
+                    sessionStorage.user = newUsername;
+                    disclaimerError.innerText = "Welcome " + newUsername;
+                    window.location.href = "./login.html";
+                } else {
+                    disclaimerError.innerText = responseL.error;
+                }
+
+
+
             } else {
                 disclaimerError.innerText = "passwords dont match";
             }

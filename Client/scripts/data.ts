@@ -11,9 +11,22 @@ export interface Recipe {
     directions: string;
     course: string;
     
-
-
 }
+
+
+export interface RecipeFull {
+    title: string;
+    author: string;
+    portions: number;
+    duration: string;
+    ingredient_Amounts: string[];
+    ingredient_Names: string[];
+    directions: string;
+    course: string;
+    _id: string;
+    
+}
+
 
 export interface Ingredient {
     amount: string;
@@ -26,6 +39,11 @@ export interface User {
     pw: string;
     favorites: string[];
 }
+
+
+
+
+
 
 
 export let users: User[] = [

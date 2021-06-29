@@ -10,23 +10,25 @@ var KMJ;
         signupButton.addEventListener("click", signUp);
     }
     let disclaimerError = document.getElementById("disclaimer");
-    function logIn() {
+    async function logIn() {
         let formdata = new FormData(document.forms[0]);
         if (noFieldsEmpty(formdata)) {
-            for (let user of KMJ.users) {
-                if (formdata.get("username") == user.name) {
-                    if (formdata.get("password") == user.pw) {
-                        sessionStorage.user = user.name;
-                        disclaimerError.innerText = "Welcome " + user.name;
-                        window.location.href = "./Main.html";
-                        return;
-                    }
-                }
+            let inputUsername = formdata.get("username").toString();
+            let user = { username: inputUsername, password: formdata.get("password").toString() };
+            let url = "http://localhost:8100/logIn";
+            let query = new URLSearchParams(user);
+            url = url + "?" + query.toString();
+            let resp = await fetch(url);
+            let responseL = await resp.json();
+            if (responseL.error == undefined) {
+                console.log(responseL.message);
+                sessionStorage.user = inputUsername;
+                disclaimerError.innerText = "Welcome " + inputUsername;
+                window.location.href = "./Main.html";
             }
-            disclaimerError.innerText = "username or password are wrong";
-        }
-        else {
-            return;
+            else {
+                disclaimerError.innerText = responseL.error;
+            }
         }
     }
     function noFieldsEmpty(_formData) {
@@ -38,14 +40,28 @@ var KMJ;
         }
         return true;
     }
-    function signUp() {
+    async function signUp() {
         let formdata = new FormData(document.forms[0]);
         if (noFieldsEmpty(formdata)) {
-            let username = formdata.get("username").toString();
+            let newUsername = formdata.get("username").toString();
             let pw = formdata.get("password").toString();
             let pwRepeat = formdata.get("rpPassword").toString();
             if (pw == pwRepeat) {
-                disclaimerError.innerText = "welcome " + username;
+                let newUser = { username: newUsername, password: pw };
+                let url = "http://localhost:8100/createUser";
+                let query = new URLSearchParams(newUser);
+                url = url + "?" + query.toString();
+                let resp = await fetch(url);
+                let responseL = await resp.json();
+                if (responseL.error == undefined) {
+                    console.log(responseL.message);
+                    sessionStorage.user = newUsername;
+                    disclaimerError.innerText = "Welcome " + newUsername;
+                    window.location.href = "./login.html";
+                }
+                else {
+                    disclaimerError.innerText = responseL.error;
+                }
             }
             else {
                 disclaimerError.innerText = "passwords dont match";
