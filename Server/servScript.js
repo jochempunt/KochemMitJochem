@@ -143,9 +143,9 @@ var Server;
                     let user = await users.findOne({ username: _user });
                     //console.log(user);
                     if (user) {
-                        if (user.favorites) {
+                        if (user.favorites[0] != undefined) {
                             for (let id of user.favorites) {
-                                let recipeID = new Mongo.ObjectId(id);
+                                let recipeID = new Mongo.ObjectId(id.toString());
                                 //cursor = recipesCollection.find({_id: recipeID});
                                 //console.log(cursor);
                                 let tempRecipe = await recipesCollection.findOne({ _id: recipeID });
