@@ -26,7 +26,8 @@ var KMJ;
         console.log("editRecipe=" + sessionStorage.editRecipeId);
         getOneRecipe(sessionStorage.editRecipeId).then(edit);
         async function getOneRecipe(_searchID) {
-            let url = "http://localhost:8100/findOneRecipe";
+            //let url: string = "http://localhost:8100/findOneRecipe";
+            let url = "https://kochem-mit-jochem.herokuapp.com/findOneRecipe";
             url = url + "?_id=" + _searchID;
             let resp = await fetch(url);
             currentRecipe = await resp.json();
@@ -92,10 +93,12 @@ var KMJ;
         let url = "";
         if (sessionStorage.editRecipeId != "") {
             console.log("bro...");
-            url = "http://localhost:8100/editRecipe";
+            //url = "http://localhost:8100/editRecipe";  
+            url = "https://kochem-mit-jochem.herokuapp.com/editRecipe";
         }
         else {
-            url = "http://localhost:8100/createRecipe";
+            //url = "http://localhost:8100/createRecipe";
+            url = "https://kochem-mit-jochem.herokuapp.com/createRecipe";
         }
         console.log("url = " + url);
         let query = new URLSearchParams(newRecipe);

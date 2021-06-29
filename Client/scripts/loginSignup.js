@@ -15,7 +15,8 @@ var KMJ;
         if (noFieldsEmpty(formdata)) {
             let inputUsername = formdata.get("username").toString();
             let user = { username: inputUsername, password: formdata.get("password").toString() };
-            let url = "http://localhost:8100/logIn";
+            //let url: string = "http://localhost:8100/logIn";
+            let url = "https://kochem-mit-jochem.herokuapp.com/logIn";
             let query = new URLSearchParams(user);
             url = url + "?" + query.toString();
             let resp = await fetch(url);
@@ -48,7 +49,8 @@ var KMJ;
             let pwRepeat = formdata.get("rpPassword").toString();
             if (pw == pwRepeat) {
                 let newUser = { username: newUsername, password: pw };
-                let url = "http://localhost:8100/createUser";
+                //let url: string = "http://localhost:8100/createUser";
+                let url = "https://kochem-mit-jochem.herokuapp.com/createUser";
                 let query = new URLSearchParams(newUser);
                 url = url + "?" + query.toString();
                 let resp = await fetch(url);

@@ -41,7 +41,8 @@ var KMJ;
     }
     // find user from database
     async function getuser(_username) {
-        let url = "http://localhost:8100/getUser?" + "username=" + _username;
+        //let url: string = "http://localhost:8100/getUser?" + "username=" + _username;
+        let url = "https://kochem-mit-jochem.herokuapp.com/getUser?" + "username=" + _username;
         let resp = await fetch(url);
         currentuser = await resp.json();
         console.log("currentuser=" + currentuser.username);
@@ -108,7 +109,8 @@ var KMJ;
             getRecipes(["main", "dessert", "starter", "misc"], sessionStorage.currentP);
         }
         async function getRecipes(_filters, _page) {
-            let url = "http://localhost:8100/findRecipes";
+            //let url: string = "http://localhost:8100/findRecipes";
+            let url = "https://kochem-mit-jochem.herokuapp.com/findRecipes";
             let recipeRequest = { filters: _filters, page: _page, username: sessionStorage.user };
             let query = new URLSearchParams(recipeRequest);
             url = url + "?" + query.toString();
@@ -214,7 +216,8 @@ var KMJ;
                     let ctrImage = rp;
                     if (ctrImage.src.includes("heart")) {
                         console.log(rp.parentElement.dataset.recipeId);
-                        let url = "http://localhost:8100/favoriteRecipe?id=" + rp.parentElement.dataset.recipeId + "&username=" + currentuser.username;
+                        //let url: string = "http://localhost:8100/favoriteRecipe?id=" + rp.parentElement.dataset.recipeId + "&username=" + currentuser.username;
+                        let url = "https://kochem-mit-jochem.herokuapp.com/favoriteRecipe?id=" + rp.parentElement.dataset.recipeId + "&username=" + currentuser.username;
                         console.log(url);
                         let resp = await fetch(url);
                         let sR = await resp.json();
@@ -232,7 +235,8 @@ var KMJ;
                         if (confirm("are you sure you want to delete this recipe?")) {
                             let recipeID = rp.parentElement.dataset.recipeId;
                             console.log(recipeID);
-                            let url = "http://localhost:8100/deleteRecipe?id=" + recipeID;
+                            //let url: string = "http://localhost:8100/deleteRecipe?id=" + recipeID ;
+                            let url = "https://kochem-mit-jochem.herokuapp.com/deleteRecipe?id=" + recipeID;
                             console.log(url);
                             let resp = await fetch(url);
                             let sR = await resp.json();

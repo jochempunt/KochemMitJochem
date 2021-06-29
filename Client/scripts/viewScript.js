@@ -7,7 +7,8 @@ var KMJ;
     //let ingredientCount: number = 2; 
     let currentRecipe = undefined; //vorArbeit für wenn ein rezept bearbeitet oder angezeigt werden soll
     async function getOneRecipe(_searchID) {
-        let url = "http://localhost:8100/findOneRecipe";
+        //let url: string = "http://localhost:8100/findOneRecipe";
+        let url = "https://kochem-mit-jochem.herokuapp.com/findOneRecipe";
         url = url + "?_id=" + _searchID;
         let resp = await fetch(url);
         currentRecipe = await resp.json();
