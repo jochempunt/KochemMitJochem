@@ -40,7 +40,8 @@ namespace KMJ {
         
 
         async function getOneRecipe(_searchID: string): Promise<void> {
-            let url: string = "http://localhost:8100/findOneRecipe";
+            //let url: string = "http://localhost:8100/findOneRecipe";
+            let url: string = "https://kochem-mit-jochem.herokuapp.com/findOneRecipe";
             url = url + "?_id=" + _searchID ;
             let resp: Response = await fetch(url);
             currentRecipe = await resp.json();
@@ -149,9 +150,11 @@ namespace KMJ {
         if (sessionStorage.editRecipeId != "") {
         console.log("bro...");
          
-        url = "http://localhost:8100/editRecipe";  
+        //url = "http://localhost:8100/editRecipe";  
+        url = "https://kochem-mit-jochem.herokuapp.com/editRecipe";  
         } else {
-        url = "http://localhost:8100/createRecipe";
+        //url = "http://localhost:8100/createRecipe";
+        url = "https://kochem-mit-jochem.herokuapp.com/createRecipe";
         }
     
     

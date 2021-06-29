@@ -38,7 +38,8 @@ namespace KMJ {
             let user: SendUser = {username: inputUsername , password: formdata.get("password").toString()};
             
             
-            let url: string = "http://localhost:8100/logIn";
+            //let url: string = "http://localhost:8100/logIn";
+            let url: string = "https://kochem-mit-jochem.herokuapp.com/logIn";
             let query: URLSearchParams = new URLSearchParams(<any>user);
             url = url + "?" + query.toString();
             let resp: Response = await fetch(url);
@@ -81,7 +82,9 @@ namespace KMJ {
                 let newUser: SendUser = {username: newUsername , password: pw};
                
                
-                let url: string = "http://localhost:8100/createUser";
+                //let url: string = "http://localhost:8100/createUser";
+                let url: string = "https://kochem-mit-jochem.herokuapp.com/createUser";
+
                 let query: URLSearchParams = new URLSearchParams(<any>newUser);
                 url = url + "?" + query.toString();
                 let resp: Response = await fetch(url);

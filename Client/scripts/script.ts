@@ -67,7 +67,9 @@ namespace KMJ {
     
     
     async function getuser(_username: string): Promise<void> {
-        let url: string = "http://localhost:8100/getUser?" + "username=" + _username;
+        //let url: string = "http://localhost:8100/getUser?" + "username=" + _username;
+        let url: string = "https://kochem-mit-jochem.herokuapp.com/getUser?" + "username=" + _username;
+        
         let resp: Response = await fetch(url);
         currentuser = await resp.json();
         console.log("currentuser=" + currentuser.username);
@@ -179,8 +181,9 @@ namespace KMJ {
         
         
         async function getRecipes(_filters: string[], _page: string): Promise<void> {
-            let url: string = "http://localhost:8100/findRecipes";
-            
+            //let url: string = "http://localhost:8100/findRecipes";
+            let url: string = "https://kochem-mit-jochem.herokuapp.com/findRecipes";
+        
             let recipeRequest: RecipeRequest = { filters: _filters, page: _page, username: sessionStorage.user};
             
             let query: URLSearchParams = new URLSearchParams(<any>recipeRequest);
@@ -339,7 +342,8 @@ namespace KMJ {
 
 
                         console.log(rp.parentElement.dataset.recipeId);
-                        let url: string = "http://localhost:8100/favoriteRecipe?id=" + rp.parentElement.dataset.recipeId + "&username=" + currentuser.username;
+                        //let url: string = "http://localhost:8100/favoriteRecipe?id=" + rp.parentElement.dataset.recipeId + "&username=" + currentuser.username;
+                        let url: string = "https://kochem-mit-jochem.herokuapp.com/favoriteRecipe?id=" + rp.parentElement.dataset.recipeId + "&username=" + currentuser.username;
                         console.log(url);
                         let resp: Response = await fetch(url);
                         let sR: ServerResponse = await resp.json();
@@ -359,7 +363,8 @@ namespace KMJ {
                             let recipeID: string = rp.parentElement.dataset.recipeId;
                             console.log(recipeID);
                             
-                            let url: string = "http://localhost:8100/deleteRecipe?id=" + recipeID ;
+                            //let url: string = "http://localhost:8100/deleteRecipe?id=" + recipeID ;
+                            let url: string = "https://kochem-mit-jochem.herokuapp.com/deleteRecipe?id=" + recipeID;
                             console.log(url);
                             
                             let resp: Response = await fetch(url);
