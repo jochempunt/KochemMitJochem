@@ -145,6 +145,7 @@ var Server;
                     if (user) {
                         if (user.favorites[0] != undefined) {
                             for (let id of user.favorites) {
+                                console.log("favorite id is:" + id);
                                 let recipeID = new Mongo.ObjectId(id.toString());
                                 //cursor = recipesCollection.find({_id: recipeID});
                                 //console.log(cursor);
