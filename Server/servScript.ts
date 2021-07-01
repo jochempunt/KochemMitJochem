@@ -52,7 +52,7 @@ export namespace Server {
     
     let dbURL: string = "mongodb+srv://jochem:punt@kmj.ficq6.mongodb.net/KMJ?retryWrites=true&w=majority";
     let mongoClient: Mongo.MongoClient = undefined;
-    //let cursor: Mongo.Cursor = undefined;
+    
     
     
     async function connectToDB(_url: string): Promise<void> {
@@ -112,7 +112,7 @@ export namespace Server {
             case "/getUser":
                 console.log("get user: " + username );
                 let usersCollection: Mongo.Collection = mongoClient.db("KMJ").collection("Users");
-               // let cursor: Mongo.Cursor = usersCollection.find({username: username});
+             
                 let currentuser: User[] = await usersCollection.findOne({username: username});
                 
                 _response.write( JSON.stringify(currentuser));
@@ -160,7 +160,7 @@ export namespace Server {
             case "/findOneRecipe":
                 console.log("finding one recipe");
                 let recipesCollection: Mongo.Collection = mongoClient.db("KMJ").collection("Recipes");
-                //let cursor: Mongo.Cursor = undefined;
+              
                 let recepID: Mongo.ObjectId = new Mongo.ObjectId(reqUrl.query["_id"].toString());
                 let recipe: Recipe = await  recipesCollection.findOne({_id: recepID});
                 _response.write(JSON.stringify(recipe));
@@ -181,7 +181,7 @@ export namespace Server {
         async function logIn(_username: string, _password: string): Promise<string> {
             
             let users: Mongo.Collection = mongoClient.db("KMJ").collection("Users");
-            //let cursor: Mongo.Cursor = users.find({username: _username});
+         
             let user: User = await  users.findOne({username: _username});
             
             if (user && user.password == _password) {
@@ -212,7 +212,7 @@ export namespace Server {
             } else {
                 serverResponse.message = "username already taken";
             }
-            
+            cursor.close();
             return JSON.stringify(serverResponse);
         }
         
@@ -269,7 +269,7 @@ export namespace Server {
                     }
                 }
             }
-
+            cursor.close();
             return JSON.stringify(filteredArray);
         }
         

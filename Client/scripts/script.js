@@ -191,6 +191,7 @@ var KMJ;
                         console.log(recepieParantelement.dataset.recipeId);
                         sessionStorage.editRecipeId = recepieParantelement.dataset.recipeId;
                         window.location.href = "./create_edit.html";
+                        return;
                     }
                     else if (ctrImage.src.includes("trash")) {
                         //ok/cancel dialog ob jemand wirklich rezept löschen will oder nicht

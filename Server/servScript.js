@@ -19,7 +19,6 @@ var Server;
     }
     let dbURL = "mongodb+srv://jochem:punt@kmj.ficq6.mongodb.net/KMJ?retryWrites=true&w=majority";
     let mongoClient = undefined;
-    //let cursor: Mongo.Cursor = undefined;
     async function connectToDB(_url) {
         let options = { useNewUrlParser: true, useUnifiedTopology: true };
         mongoClient = new Mongo.MongoClient(_url, options);
@@ -50,7 +49,6 @@ var Server;
             case "/getUser":
                 console.log("get user: " + username);
                 let usersCollection = mongoClient.db("KMJ").collection("Users");
-                // let cursor: Mongo.Cursor = usersCollection.find({username: username});
                 let currentuser = await usersCollection.findOne({ username: username });
                 _response.write(JSON.stringify(currentuser));
                 break;
@@ -83,7 +81,6 @@ var Server;
             case "/findOneRecipe":
                 console.log("finding one recipe");
                 let recipesCollection = mongoClient.db("KMJ").collection("Recipes");
-                //let cursor: Mongo.Cursor = undefined;
                 let recepID = new Mongo.ObjectId(reqUrl.query["_id"].toString());
                 let recipe = await recipesCollection.findOne({ _id: recepID });
                 _response.write(JSON.stringify(recipe));
@@ -92,7 +89,6 @@ var Server;
         _response.end();
         async function logIn(_username, _password) {
             let users = mongoClient.db("KMJ").collection("Users");
-            //let cursor: Mongo.Cursor = users.find({username: _username});
             let user = await users.findOne({ username: _username });
             if (user && user.password == _password) {
                 serverResponse.message = "welcome" + _username;
@@ -121,6 +117,7 @@ var Server;
             else {
                 serverResponse.message = "username already taken";
             }
+            cursor.close();
             return JSON.stringify(serverResponse);
         }
         async function findRecipes(_filters, _page, _user) {
@@ -168,6 +165,7 @@ var Server;
                     }
                 }
             }
+            cursor.close();
             return JSON.stringify(filteredArray);
         }
         async function deleteRecipe(_recipeID) {

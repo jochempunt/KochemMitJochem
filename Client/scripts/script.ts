@@ -320,7 +320,7 @@ namespace KMJ {
                         
                         sessionStorage.editRecipeId = recepieParantelement.dataset.recipeId;
                         window.location.href = "./create_edit.html";
-                        
+                        return;
                     } else if (ctrImage.src.includes("trash")) {
                         //ok/cancel dialog ob jemand wirklich rezept löschen will oder nicht
                         if (confirm("are you sure you want to delete this recipe?")) {
