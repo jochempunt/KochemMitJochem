@@ -100,7 +100,7 @@ form{
     background-color:var(--lightblue);
     color: white;
     font-size: 1.3em;
-    margin-top: 150px;
+    margin-top: 3em;
    
 }
 
@@ -120,15 +120,33 @@ form{
 .createIco{
     display: inline;
     position: fixed;
-    top: 200px;
+    top: 195px;
     right: 10%;
 }
 .recipeControllIcon{
     width: auto;
     height: 1.5em;
-    float: right;
     margin-right: 1rem;
+    display: inline;
 }
+
+
+
+.recipeFooter{
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    flex-wrap: nowrap;
+    vertical-align: baseline;
+    align-items: center;
+    align-self: flex-end;
+}
+
+.authorPara{
+    display: inline;
+    margin-right:2rem;
+}
+
 
 input[type="button"]{
     background-color: rgb(97, 162, 236);
@@ -163,12 +181,17 @@ h1{
     padding-right: 1rem;
    
 }
+
+.magrinTopDiv{
+    margin-top: 1em;
+}
+
 #nakedLink{
     background-color: white;
     border-width: 0.2rem;
     border-color: var(--lightblue);
     border-style: solid;
-    margin-top: 1em;
+    padding: 0.5rem;
     max-width: 50%;
     left: 33%;
     transform: translate(50%,0);
@@ -214,6 +237,7 @@ a .fas{
 }
 
 .recipe{
+    position: relative;
     display: block;
     text-align: left;
     border-style: solid;
@@ -226,6 +250,8 @@ a .fas{
     max-width: 500px;
     box-shadow: 0.2rem 0.1rem 0.2rem rgba(0, 0, 0, 0.171);
     margin:0.6em 0.6em;
+    transition: all 0.1s linear;
+    height: 180px;
 }
 
 .recipe h4{
@@ -341,12 +367,24 @@ svg{
         background-color: white;
         box-shadow: 0 0.3rem 0.3rem rgba(0, 0, 0, 0.411); ;
     }
+
+
+    #lo-Si-Main{
+        width: 50%;
+    }
+    
+    #disclaimer{
+        margin-top: 50%;
+    }
+
     .createIco{
         right: 22%;
         top: 230px;
     }
 
-    
+    input[type="button"]:hover{
+        background-color: lightskyblue;
+    }
 }
 
 @media screen and (min-width:1024px){
@@ -356,8 +394,26 @@ svg{
         max-width: 1200px;
     }
 
+    
+
     .createIco{
         right: 25%;
         top: 250px;
     }
+}
+
+@media screen and (min-width:1600px){
+
+.createIco{
+    right: 36%;
+}
+
+.recipe:hover{
+    background-color: rgba(213, 227, 253, 0.404);
+    cursor: pointer;
+}
+
+
+
+
 }

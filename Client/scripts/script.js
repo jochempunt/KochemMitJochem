@@ -116,49 +116,6 @@ var KMJ;
             url = url + "?" + query.toString();
             let resp = await fetch(url);
             let foundrecipes = await resp.json();
-            /*let foundrecipes: Recipe[] = [];
-            let recipeList: Recipe[] = [];*/
-            /* switch (_page) {
-                case "ALL":
-                
-                
-                
-                
-                recipeList = recipes;
-                break;
-                case"FAVORITES":
-                for (let user of users) {
-                    if ( user.name == sessionStorage.user) {
-                        for (let favorite of user.favorites)
-                        for ( let recipe of recipes) {
-                            if (favorite == recipe.title) {
-                                recipeList[recipeList.length] = recipe;
-                                break;
-                            }
-                        }
-                    }
-                }
-                break;
-                case"MYRECIPES":
-                for (let recipe of recipes) {
-                    if (sessionStorage.user == recipe.author) {
-                        recipeList[recipeList.length] = recipe;
-                    }
-                }
-                break;
-            }
-            
-            
-            for (let  recipe of recipeList ) {
-                for (let i: number = 0; i <= _filters.length; i++) {
-                    console.log(recipe.title + ":" + recipe.course);
-                    if (recipe.course == _filters[i]) {
-                        foundrecipes[foundrecipes.length] = recipe;
-                        break;
-                        
-                    }
-                }
-            } */
             let recipiesContainer = document.getElementById("recepies");
             recipiesContainer.innerHTML = "";
             for (let recipe of foundrecipes) {
@@ -180,15 +137,22 @@ var KMJ;
                 if (currentuser.favorites.includes(recipe._id.toString())) {
                     favorised = true;
                 }
+                let recipeFooter = document.createElement("div");
+                recipeFooter.className = "recipeFooter";
+                recipeContainer.appendChild(recipeFooter);
+                let authorParagraph = document.createElement("p");
+                authorParagraph.className = "authorPara";
+                authorParagraph.innerHTML = "<i>" + recipe.author + "</i>";
+                recipeFooter.appendChild(authorParagraph);
                 if (_page == "MYRECIPES") {
                     let deleteIcon = document.createElement("img");
                     deleteIcon.src = "../images/trash.svg";
                     deleteIcon.className = "recipeControllIcon";
-                    recipeContainer.appendChild(deleteIcon);
+                    recipeFooter.appendChild(deleteIcon);
                     let editIcon = document.createElement("img");
                     editIcon.src = "../images/edit.svg";
                     editIcon.className = "recipeControllIcon";
-                    recipeContainer.appendChild(editIcon);
+                    recipeFooter.appendChild(editIcon);
                 }
                 let heartimg = document.createElement("img");
                 if (favorised) {
@@ -198,10 +162,7 @@ var KMJ;
                     heartimg.src = "../images/heartOutline.svg";
                 }
                 heartimg.className = "recipeControllIcon";
-                recipeContainer.appendChild(heartimg);
-                let authorParagraph = document.createElement("p");
-                authorParagraph.innerHTML = "<i>" + recipe.author + "</i>";
-                recipeContainer.appendChild(authorParagraph);
+                recipeFooter.appendChild(heartimg);
                 //---- replace with recipe ID after database anknüpfung
                 recipeContainer.dataset.recipeId = recipe._id.toString();
                 recipiesContainer.appendChild(recipeContainer);

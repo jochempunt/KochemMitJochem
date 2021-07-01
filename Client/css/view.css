@@ -4,6 +4,7 @@ body{
     font-family: 'Poppins', sans-serif;
     top: 0;
     margin:0;
+    overflow-x: hidden;
     
 }
 .fa-plus-circle{
@@ -28,7 +29,7 @@ header{
     margin-left: 0.5rem;
 }
 h1{
-    font-size: 2em;
+    font-size: 2.5em;
 }
 h2{
     margin-top: 0;  
@@ -44,7 +45,8 @@ em{
 }
 
 main{
-    margin-left:1rem;
+    height: 100vh;
+    margin: 0 0.4rem;
 }
 
 #back_cancel{
@@ -190,18 +192,22 @@ select{
 
 @media screen and (min-width:606px){
     
-    
+    body{
+        background-color:rgb(221, 230, 253); 
+    }
 
     
     main{
         max-width: 600px;
+        width: 50%;
         background-color: white;
-        padding: 0 1rem;
+        padding: 0 2rem;
         box-shadow: 0px 3px 4px 4px rgba(0, 0, 0, 0.075);
     }  
     
     h2{
         font-size: 1.8em;
+        margin-right: 1rem;
     }
    
    
@@ -214,6 +220,7 @@ select{
     }
     .edit{
         width: 550px;
+      
         
     }
     .widthMax input,textarea{
@@ -223,5 +230,18 @@ select{
     textarea{
         font-size: 2em;
     }
+
+    #finishButtonMobile{
+        right: 32%;
+    }
     
-} 
+}
+
+
+@media screen and (min-width:1024px){
+    
+    main{
+    max-width: 1000px;
+    padding: 0 4rem;
+    }
+}

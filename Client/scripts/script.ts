@@ -193,52 +193,6 @@ namespace KMJ {
             
             
             
-            /*let foundrecipes: Recipe[] = [];
-            let recipeList: Recipe[] = [];*/
-            
-            
-            
-            /* switch (_page) {
-                case "ALL":
-                
-                
-                
-                
-                recipeList = recipes;
-                break;
-                case"FAVORITES": 
-                for (let user of users) {
-                    if ( user.name == sessionStorage.user) {
-                        for (let favorite of user.favorites)
-                        for ( let recipe of recipes) {
-                            if (favorite == recipe.title) {
-                                recipeList[recipeList.length] = recipe;
-                                break;
-                            }
-                        }
-                    }
-                }
-                break;
-                case"MYRECIPES":
-                for (let recipe of recipes) {
-                    if (sessionStorage.user == recipe.author) {
-                        recipeList[recipeList.length] = recipe;
-                    }
-                }
-                break;
-            }
-            
-            
-            for (let  recipe of recipeList ) {
-                for (let i: number = 0; i <= _filters.length; i++) {
-                    console.log(recipe.title + ":" + recipe.course);
-                    if (recipe.course == _filters[i]) {
-                        foundrecipes[foundrecipes.length] = recipe;
-                        break;
-                        
-                    }
-                }
-            } */
             
             
             
@@ -282,19 +236,28 @@ namespace KMJ {
                     favorised = true;
                 }
                 
-              
+                let recipeFooter: HTMLDivElement = document.createElement("div");
+                recipeFooter.className = "recipeFooter";
+                recipeContainer.appendChild(recipeFooter);
                 
+
+                let authorParagraph: HTMLParagraphElement = document.createElement("p");
+                authorParagraph.className = "authorPara";
+                authorParagraph.innerHTML = "<i>" + recipe.author + "</i>";
+                recipeFooter.appendChild(authorParagraph);
+
+
                 
                 if (_page == "MYRECIPES") {
                     let deleteIcon: HTMLImageElement = document.createElement("img");
                     deleteIcon.src = "../images/trash.svg";
                     deleteIcon.className = "recipeControllIcon";
-                    recipeContainer.appendChild(deleteIcon);
+                    recipeFooter.appendChild(deleteIcon);
                     
                     let editIcon: HTMLImageElement = document.createElement("img");
                     editIcon.src = "../images/edit.svg";
                     editIcon.className = "recipeControllIcon";
-                    recipeContainer.appendChild(editIcon);
+                    recipeFooter.appendChild(editIcon);
                     
                 }
                 
@@ -308,12 +271,10 @@ namespace KMJ {
                 
                 
                 heartimg.className = "recipeControllIcon";
-                recipeContainer.appendChild(heartimg);
+                recipeFooter.appendChild(heartimg);
                 
                 
-                let authorParagraph: HTMLParagraphElement = document.createElement("p");
-                authorParagraph.innerHTML = "<i>" + recipe.author + "</i>";
-                recipeContainer.appendChild(authorParagraph);
+              
                 
                 //---- replace with recipe ID after database anknüpfung
                 recipeContainer.dataset.recipeId = recipe._id.toString();
