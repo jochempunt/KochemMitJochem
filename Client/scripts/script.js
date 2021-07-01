@@ -175,10 +175,11 @@ var KMJ;
             if (rp.className != "recipe") {
                 if (rp.className == "recipeControllIcon") {
                     let ctrImage = rp;
+                    let recepieParantelement = rp.parentElement.parentElement;
                     if (ctrImage.src.includes("heart")) {
-                        console.log(rp.parentElement.dataset.recipeId);
+                        console.log(recepieParantelement.dataset.recipeId);
                         //let url: string = "http://localhost:8100/favoriteRecipe?id=" + rp.parentElement.dataset.recipeId + "&username=" + currentuser.username;
-                        let url = "https://kochem-mit-jochem.herokuapp.com/favoriteRecipe?id=" + rp.parentElement.dataset.recipeId + "&username=" + currentuser.username;
+                        let url = "https://kochem-mit-jochem.herokuapp.com/favoriteRecipe?id=" + recepieParantelement.dataset.recipeId + "&username=" + currentuser.username;
                         console.log(url);
                         let resp = await fetch(url);
                         let sR = await resp.json();
@@ -187,14 +188,14 @@ var KMJ;
                         return;
                     }
                     else if (ctrImage.src.includes("edit")) {
-                        console.log(rp.parentElement.dataset.recipeId);
-                        sessionStorage.editRecipeId = rp.parentElement.dataset.recipeId;
+                        console.log(recepieParantelement.dataset.recipeId);
+                        sessionStorage.editRecipeId = recepieParantelement.dataset.recipeId;
                         window.location.href = "./create_edit.html";
                     }
                     else if (ctrImage.src.includes("trash")) {
                         //ok/cancel dialog ob jemand wirklich rezept löschen will oder nicht
                         if (confirm("are you sure you want to delete this recipe?")) {
-                            let recipeID = rp.parentElement.dataset.recipeId;
+                            let recipeID = recepieParantelement.dataset.recipeId;
                             console.log(recipeID);
                             //let url: string = "http://localhost:8100/deleteRecipe?id=" + recipeID ;
                             let url = "https://kochem-mit-jochem.herokuapp.com/deleteRecipe?id=" + recipeID;
@@ -218,10 +219,12 @@ var KMJ;
                     else {
                         rp = rp.parentElement.parentElement;
                     }
-                    sessionStorage.viewRecipeId = rp.dataset.recipeId;
-                    window.location.href = "view.html";
+                    /*   sessionStorage.viewRecipeId = rp.dataset.recipeId;
+                      window.location.href = "view.html"; */
                 }
             }
+            sessionStorage.viewRecipeId = rp.dataset.recipeId;
+            window.location.href = "view.html";
             //
         }
         // --------------------------------------- filtersearch --------//

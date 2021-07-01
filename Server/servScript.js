@@ -89,6 +89,7 @@ var Server;
                 _response.write(JSON.stringify(recipe));
                 break;
         }
+        mongoClient.close();
         _response.end();
         async function logIn(_username, _password) {
             let users = mongoClient.db("KMJ").collection("Users");
