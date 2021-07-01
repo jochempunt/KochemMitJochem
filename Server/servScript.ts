@@ -212,7 +212,9 @@ export namespace Server {
             } else {
                 serverResponse.message = "username already taken";
             }
-            cursor.close();
+            if (cursor) {
+                cursor.close();
+            }
             return JSON.stringify(serverResponse);
         }
         
@@ -235,10 +237,9 @@ export namespace Server {
                     break;
                 case"FAVORITES":
                     let users: Mongo.Collection = mongoClient.db("KMJ").collection("Users");
-                    //console.log(_user);
-                    //cursor = 
+                 
                     let user: User = await users.findOne({username: _user});
-                    //console.log(user);
+                  
                     if (user) {
                     if (user.favorites) {
                         for (let id of user.favorites ) {
@@ -246,8 +247,7 @@ export namespace Server {
                                 console.log("favorite id is:" + id);
                             
                                 let recipeID: Mongo.ObjectId = new Mongo.ObjectId(id.toString());
-                            //cursor = recipesCollection.find({_id: recipeID});
-                            //console.log(cursor);
+                           
                             
                                 let tempRecipe: FullRecipe = await recipesCollection.findOne({_id: recipeID});
                                 if (tempRecipe) {
@@ -269,7 +269,10 @@ export namespace Server {
                     }
                 }
             }
-            cursor.close();
+            if (cursor) {
+                cursor.close();
+            }
+            
             return JSON.stringify(filteredArray);
         }
         
