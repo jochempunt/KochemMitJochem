@@ -171,7 +171,7 @@ export namespace Server {
         
         
         
-        mongoClient.close();
+        
         _response.end();
         
         
