@@ -82,6 +82,8 @@ namespace KMJ {
         let formdata: FormData = new FormData(document.forms[0]);
         if (noFieldsEmpty(formdata)) {
             let newUsername: string = formdata.get("username").toString();
+            console.log("user: " + newUsername);
+            
             let pw: string = formdata.get("password").toString();
             let pwRepeat: string = formdata.get("rpPassword").toString();
             if (pw == pwRepeat) {
@@ -103,7 +105,7 @@ namespace KMJ {
                     sessionStorage.user = newUsername;
                     header.className = "";
                     disclaimerError.innerText = "Welcome " + newUsername;
-                    disclaimerError.innerText = responseL.error;
+                    //disclaimerError.innerText = responseL.error;
                     //window.location.href = "./login.html";
                 } else {
                     disclaimerError.innerText = responseL.error;

@@ -116,7 +116,7 @@ var Server;
                 serverResponse.message = "welcome new user: " + _username;
             }
             else {
-                serverResponse.message = "username" + _username + "already taken";
+                serverResponse.error = "username" + _username + "already taken";
             }
             if (cursor) {
                 cursor.close();
