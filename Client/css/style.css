@@ -12,7 +12,7 @@ body{
     margin: 0 auto;
     position:relative;
     display: grid;
-    background: url("../images/utensils.svg");
+    background: url("../images/utensils.png");
     background-size:200px;
     
     background-repeat:repeat-x;
