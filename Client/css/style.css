@@ -29,7 +29,10 @@ body{
 }
 
 .heartClick{
-    
+  
+    -webkit-filter:drop-shadow(2px 1px 0 rgba(190, 218, 255, 0.8)) 
+                   drop-shadow(-1px -2px 0 rgba(190, 218, 255, 0.8))
+                   drop-shadow(-1px 1px 0 rgba(190, 218, 255, 0.8)); ;
     filter: drop-shadow(2px 1px 0 rgba(190, 218, 255, 0.8)) 
             drop-shadow(-1px -2px 0 rgba(190, 218, 255, 0.8))
             drop-shadow(-1px 1px 0 rgba(190, 218, 255, 0.8));
@@ -142,6 +145,7 @@ form{
 .createIco svg{
     width: 2.8em;
     fill:rgb(71, 107, 214);
+    z-index: 2;
 }
 
 .createIco{
@@ -277,6 +281,7 @@ h1{
     margin:0.6em 0.6em;
     transition: all 0.1s linear;
     height: 180px;
+    z-index: -1;
 }
 
 .recipe h4{
