@@ -16,7 +16,7 @@ namespace KMJ {
         newIngredientAmount.type = "text";
         newIngredientAmount.className = "amount";
         newIngredientAmount.id = "Amount" + ingredientCount ;
-        newIngredientAmount.name = "Amount" + ingredientCount ;
+        newIngredientAmount.name = "Amount";
         newIngredientAmount.placeholder = "Amount";
         
         let newIngridientName: HTMLInputElement = document.createElement("input");
@@ -127,6 +127,8 @@ namespace KMJ {
             ingredientNamelist[ingredientNamelist.length] = ingredientName;
             i++; 
         } 
+        console.log("amount of ingredients = " + i);
+        
         
         let newRecipe: RecipeFull = {title: formdata.get("recipeTitle").toString(),
         duration: formdata.get("duration").toString(),
@@ -168,7 +170,7 @@ namespace KMJ {
         let data: string = await resp.json();
         console.log(data);
     
-    //sessionStorage.currentRecipe = undefined;
+    
         window.location.href = "./Main.html";
     
     

@@ -10,7 +10,7 @@ var KMJ;
         newIngredientAmount.type = "text";
         newIngredientAmount.className = "amount";
         newIngredientAmount.id = "Amount" + ingredientCount;
-        newIngredientAmount.name = "Amount" + ingredientCount;
+        newIngredientAmount.name = "Amount";
         newIngredientAmount.placeholder = "Amount";
         let newIngridientName = document.createElement("input");
         newIngridientName.type = "text";
@@ -77,6 +77,7 @@ var KMJ;
             ingredientNamelist[ingredientNamelist.length] = ingredientName;
             i++;
         }
+        console.log("amount of ingredients = " + i);
         let newRecipe = { title: formdata.get("recipeTitle").toString(),
             duration: formdata.get("duration").toString(),
             course: formdata.get("selectCourse").toString(),
@@ -106,7 +107,6 @@ var KMJ;
         let resp = await fetch(url);
         let data = await resp.json();
         console.log(data);
-        //sessionStorage.currentRecipe = undefined;
         window.location.href = "./Main.html";
     }
 })(KMJ || (KMJ = {}));

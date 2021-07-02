@@ -15,6 +15,8 @@ namespace KMJ {
         url = url + "?_id=" + _searchID ;
         let resp: Response = await fetch(url);
         currentRecipe = await resp.json();
+        console.log(currentRecipe);
+        
     }
     
     if (sessionStorage.viewRecipeID != "") {     // angeklicktes/ausgewähltes rezept wird aus der datenbank geladen
@@ -51,6 +53,7 @@ namespace KMJ {
             portions.innerText = "" + currentRecipe.portions;
             
             let ingredientList: HTMLUListElement = <HTMLUListElement> document.getElementById("ingredient-list");
+            console.log(currentRecipe.ingredient_Amounts.length);
             
             for (let i: number = 0; i < currentRecipe.ingredient_Amounts.length; i++ ) {
                 let li: HTMLLIElement = document.createElement("li");
