@@ -21,11 +21,17 @@ var Server;
     let mongoClient = undefined;
     async function connectToDB(_url) {
         let options = { useNewUrlParser: true, useUnifiedTopology: true };
-        mongoClient = new Mongo.MongoClient(_url, options);
-        await mongoClient.connect();
+        try {
+            mongoClient = new Mongo.MongoClient(_url, options);
+            await mongoClient.connect();
+        }
+        catch (error) {
+            console.log(error);
+        }
     }
+    connectToDB(dbURL).catch(console.error);
     async function handleRequest(_request, _response) {
-        await connectToDB(dbURL);
+        //await connectToDB(dbURL);
         _response.setHeader("Access-Control-Allow-Origin", "*");
         _response.setHeader("content-type", "application/json; charset=utf-8");
         console.log("handling request");

@@ -53,13 +53,20 @@ export namespace Server {
     let dbURL: string = "mongodb+srv://jochem:punt@kmj.ficq6.mongodb.net/KMJ?retryWrites=true&w=majority";
     let mongoClient: Mongo.MongoClient = undefined;
     
-    
-    
     async function connectToDB(_url: string): Promise<void> {
         let options: Mongo.MongoClientOptions = {useNewUrlParser: true, useUnifiedTopology: true};
-        mongoClient  = new Mongo.MongoClient(_url, options);
-        await mongoClient.connect();
+        try {
+            mongoClient  = new Mongo.MongoClient(_url, options);
+            await mongoClient.connect();
+        } catch (error) {
+            console.log(error);
+        }
+        
     }
+
+    connectToDB(dbURL).catch(console.error);
+    
+    
     
     interface User {
         username: string;
@@ -71,7 +78,7 @@ export namespace Server {
     
     async function handleRequest(_request: Http.IncomingMessage, _response: Http.ServerResponse): Promise<void> {
         
-        await connectToDB(dbURL);
+        //await connectToDB(dbURL);
         
         
         
@@ -112,6 +119,7 @@ export namespace Server {
             case "/getUser":
                 console.log("get user: " + username );
                 let usersCollection: Mongo.Collection = mongoClient.db("KMJ").collection("Users");
+               
              
                 let currentuser: User[] = await usersCollection.findOne({username: username});
                 

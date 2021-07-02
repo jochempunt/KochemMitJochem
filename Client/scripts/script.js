@@ -177,6 +177,7 @@ var KMJ;
                     let ctrImage = rp;
                     let recepieParantelement = rp.parentElement.parentElement;
                     if (ctrImage.src.includes("heart")) {
+                        ctrImage.className = ctrImage.className + " heartClick";
                         console.log(recepieParantelement.dataset.recipeId);
                         //let url: string = "http://localhost:8100/favoriteRecipe?id=" + rp.parentElement.dataset.recipeId + "&username=" + currentuser.username;
                         let url = "https://kochem-mit-jochem.herokuapp.com/favoriteRecipe?id=" + recepieParantelement.dataset.recipeId + "&username=" + currentuser.username;

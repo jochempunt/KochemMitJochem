@@ -300,9 +300,10 @@ namespace KMJ {
             if (rp.className != "recipe") {
                 if (rp.className == "recipeControllIcon") {
                     let ctrImage:  HTMLImageElement = <HTMLImageElement> rp;
+                    
                     let recepieParantelement: HTMLElement = rp.parentElement.parentElement;
                     if (ctrImage.src.includes("heart")) {
-
+                        ctrImage.className = ctrImage.className + " heartClick";   
                        
                         console.log(recepieParantelement.dataset.recipeId);
                         //let url: string = "http://localhost:8100/favoriteRecipe?id=" + rp.parentElement.dataset.recipeId + "&username=" + currentuser.username;
@@ -311,8 +312,9 @@ namespace KMJ {
                         let resp: Response = await fetch(url);
                         let sR: ServerResponse = await resp.json();
                         console.log(sR.message);
+                        
                         filterSearch();
-
+                      
 
                         return;
                     } else if (ctrImage.src.includes("edit")) {
