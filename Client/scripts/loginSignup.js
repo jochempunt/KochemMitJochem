@@ -67,7 +67,7 @@ var KMJ;
                     header.className = "";
                     disclaimerError.innerText = "Welcome " + newUsername;
                     //disclaimerError.innerText = responseL.error;
-                    //window.location.href = "./login.html";
+                    window.location.href = "./login.html";
                 }
                 else {
                     disclaimerError.innerText = responseL.error;
