@@ -198,6 +198,8 @@ export namespace Server {
             let cursor: Mongo.Cursor = usersCollection.find({username: _username});
             let users: User[] = await cursor.toArray();
             let usernameTaken: boolean = false;
+            console.log("creating user " + _username);
+            
             for ( let user of users) {
                 if ( _username == user.username) {
                     usernameTaken = true;
@@ -210,7 +212,7 @@ export namespace Server {
                 serverResponse.message = "welcome new user: " + _username;
                 
             } else {
-                serverResponse.message = "username already taken";
+                serverResponse.message = "username"+ _username + "already taken";
             }
             if (cursor) {
                 cursor.close();

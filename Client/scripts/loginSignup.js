@@ -31,6 +31,7 @@ var KMJ;
                 window.location.href = "./Main.html";
             }
             else {
+                header.className = "error";
                 disclaimerError.innerText = responseL.error;
             }
         }
@@ -64,13 +65,16 @@ var KMJ;
                     sessionStorage.user = newUsername;
                     header.className = "";
                     disclaimerError.innerText = "Welcome " + newUsername;
-                    window.location.href = "./login.html";
+                    disclaimerError.innerText = responseL.error;
+                    //window.location.href = "./login.html";
                 }
                 else {
                     disclaimerError.innerText = responseL.error;
+                    header.className = "error";
                 }
             }
             else {
+                header.className = "error";
                 disclaimerError.innerText = "passwords dont match";
             }
         }

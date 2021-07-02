@@ -24,7 +24,9 @@ body{
     
 }
 
-
+.error{
+    background-color: rgb(197, 55, 67);
+}
 
 
 .loading{

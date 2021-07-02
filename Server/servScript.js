@@ -103,6 +103,7 @@ var Server;
             let cursor = usersCollection.find({ username: _username });
             let users = await cursor.toArray();
             let usernameTaken = false;
+            console.log("creating user " + _username);
             for (let user of users) {
                 if (_username == user.username) {
                     usernameTaken = true;
@@ -115,7 +116,7 @@ var Server;
                 serverResponse.message = "welcome new user: " + _username;
             }
             else {
-                serverResponse.message = "username already taken";
+                serverResponse.message = "username" + _username + "already taken";
             }
             if (cursor) {
                 cursor.close();
