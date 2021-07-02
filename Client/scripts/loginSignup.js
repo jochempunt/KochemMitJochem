@@ -10,7 +10,9 @@ var KMJ;
         signupButton.addEventListener("click", signUp);
     }
     let disclaimerError = document.getElementById("disclaimer");
+    let header = document.getElementById("header");
     async function logIn() {
+        header.className = "loading";
         let formdata = new FormData(document.forms[0]);
         if (noFieldsEmpty(formdata)) {
             let inputUsername = formdata.get("username").toString();
@@ -24,6 +26,7 @@ var KMJ;
             if (responseL.error == undefined) {
                 console.log(responseL.message);
                 sessionStorage.user = inputUsername;
+                header.className = "";
                 disclaimerError.innerText = "Welcome " + inputUsername;
                 window.location.href = "./Main.html";
             }
@@ -42,6 +45,7 @@ var KMJ;
         return true;
     }
     async function signUp() {
+        header.className = "loading";
         let formdata = new FormData(document.forms[0]);
         if (noFieldsEmpty(formdata)) {
             let newUsername = formdata.get("username").toString();
@@ -58,6 +62,7 @@ var KMJ;
                 if (responseL.error == undefined) {
                     console.log(responseL.message);
                     sessionStorage.user = newUsername;
+                    header.className = "";
                     disclaimerError.innerText = "Welcome " + newUsername;
                     window.location.href = "./login.html";
                 }

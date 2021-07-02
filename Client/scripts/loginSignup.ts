@@ -28,8 +28,12 @@ namespace KMJ {
         error: string;
     }
 
+    let header: HTMLElement = document.getElementById("header");
+
+
 
     async function logIn(): Promise<void> {
+        header.className = "loading";
         let formdata: FormData = new FormData(document.forms[0]);
         if (noFieldsEmpty(formdata)) {
             
@@ -49,6 +53,7 @@ namespace KMJ {
                 console.log(responseL.message);
                 
                 sessionStorage.user = inputUsername;
+                header.className = "";
                 disclaimerError.innerText = "Welcome " + inputUsername;
                 window.location.href = "./Main.html";
             } else {
@@ -72,6 +77,7 @@ namespace KMJ {
 
 
     async function signUp(): Promise<void> {
+        header.className = "loading";
         let formdata: FormData = new FormData(document.forms[0]);
         if (noFieldsEmpty(formdata)) {
             let newUsername: string = formdata.get("username").toString();
@@ -94,6 +100,7 @@ namespace KMJ {
                     console.log(responseL.message);
                     
                     sessionStorage.user = newUsername;
+                    header.className = "";
                     disclaimerError.innerText = "Welcome " + newUsername;
                     window.location.href = "./login.html";
                 } else {

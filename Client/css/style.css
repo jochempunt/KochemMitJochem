@@ -2,6 +2,7 @@
 
 :root{
     --lightblue: rgb(162, 183, 247);
+   
 }
 
 body{
@@ -23,6 +24,23 @@ body{
     
 }
 
+
+
+
+.loading{
+    background: linear-gradient(90deg,var(--lightblue), #17a559);
+    background-size: 400% 400%;
+    animation-name: load;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+@keyframes load {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
 header{
     display: flex;
     align-items: center;
