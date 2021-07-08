@@ -4,7 +4,7 @@ namespace KMJ {
     if (!sessionStorage.user) {
         window.location.href = "./login.html";
     }
-    //let ingredientCount: number = 2; 
+    
     
     let currentRecipe: Recipe = undefined; //vorArbeit für wenn ein rezept bearbeitet oder angezeigt werden soll
     
@@ -28,10 +28,11 @@ namespace KMJ {
         
         
     }
-    
+    //funktion die für die allg. anzeige eines rezepts zuständig ist
     function view(): void {
         
         if (window.location.href.includes("view")) {
+            
             let title: HTMLHeadingElement = <HTMLHeadingElement> document.getElementById("Title");
             
             if (currentRecipe) {
@@ -70,10 +71,10 @@ namespace KMJ {
             let directionP: HTMLParagraphElement = <HTMLParagraphElement> document.getElementById("direction-paragraph");
             directionP.innerText = currentRecipe.directions;
         }
-}
-
-
-
-
-
+    }
+    
+    
+    
+    
+    
 }

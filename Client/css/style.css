@@ -371,6 +371,11 @@ svg{
     display: none;
 }
 
+
+.meme{
+    display: none;
+ }
+
 @media screen and (min-width:773px){
     
     body{
@@ -389,8 +394,11 @@ svg{
         width: 50%;
     }
     
+
+   
+
     #disclaimer{
-        margin-top: 50%;
+        margin-top: 20%;
     }
 
     .createIco{
@@ -423,6 +431,18 @@ svg{
 .createIco{
     right: 36%;
 }
+
+
+.meme{
+    display: block;
+    z-index: 3;
+    position: absolute;
+    top: 250px;
+    left: 450px;
+    width: 15%;
+    position: fixed;
+}
+
 
 .recipe:hover{
     background-color: rgba(213, 227, 253, 0.404);
