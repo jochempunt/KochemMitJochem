@@ -43,12 +43,12 @@ body{
 
 .recipeControllIcon:hover{
   
-    -webkit-filter:drop-shadow(2px 1px 0 rgba(190, 255, 220, 0.568)) 
-                   drop-shadow(-1px -2px 0 rgba(190, 255, 220, 0.568))
-                   drop-shadow(-1px 1px 0 rgba(190, 255, 220, 0.568)); ;
-    filter: drop-shadow(2px 1px 0 rgba(190, 255, 220, 0.568)) 
-            drop-shadow(-1px -2px 0 rgba(190, 255, 220, 0.568))
-            drop-shadow(-1px 1px 0 rgba(190, 255, 220, 0.568));
+    -webkit-filter:drop-shadow(2px 1px 0 rgba(56, 221, 83, 0.644)) 
+                   drop-shadow(-1px -2px 0 rgba(56, 221, 83, 0.644))
+                   drop-shadow(-1px 1px 0 rgba(56, 221, 83, 0.644)); ;
+    filter: drop-shadow(2px 1px 0 rgba(56, 221, 83, 0.644)) 
+            drop-shadow(-1px -2px 0 rgba(56, 221, 83, 0.644))
+            drop-shadow(-1px 1px 0 rgba(56, 221, 83, 0.644));
     
 }
 
@@ -115,8 +115,6 @@ main{
 }
 
 h1{
-    /*margin-left: 30%;
-    margin-right:30%;*/
     font-size: 2.3em;
     height: 33%;
     padding: 0.5rem;
@@ -178,8 +176,6 @@ form{
     cursor: pointer;
 }
 
-
-
 .recipeFooter{
     position: absolute;
     bottom: 0;
@@ -210,7 +206,6 @@ input[type="checkbox"],
 label{
     cursor:pointer;
 }
-
 
 
 input[type="button"]:active{

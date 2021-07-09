@@ -1,30 +1,6 @@
 "use strict";
 var KMJ;
 (function (KMJ) {
-    ///-------------TO-DO-----------------------------////
-    /*
-    
-    
-    
-    
-    - Favorisierung
-    
-    - editierung & löschung von rezepten
-    
-    
-    - serveranbindung
-    
-    - datenbankanbindung
-    
-    
-    -user creation & login datenbank
-    
-    -rezept datenbank
-    
-    
-    
-    
-    */
     document.getElementById("createIconHidden").addEventListener("click", createRecipe);
     function createRecipe() {
         sessionStorage.editRecipeId = "";
@@ -169,7 +145,7 @@ var KMJ;
                 recipeContainer.addEventListener("click", viewRecipe);
             }
         }
-        //----------------------------------------view Recipe------------//
+        //----------------------------------------view Recipe---------------------------//
         async function viewRecipe(_event) {
             let rp = _event.target;
             if (rp.className != "recipe") {
@@ -222,14 +198,13 @@ var KMJ;
                         rp = rp.parentElement.parentElement;
                     }
                     /*   sessionStorage.viewRecipeId = rp.dataset.recipeId;
-                      window.location.href = "view.html"; */
+                    window.location.href = "view.html"; */
                 }
             }
             sessionStorage.viewRecipeId = rp.dataset.recipeId;
             window.location.href = "view.html";
-            //
         }
-        // --------------------------------------- filtersearch --------//
+        // --------------------------------------- filtersearch -----------------------------------//
         document.getElementById("submitFilters").addEventListener("click", filterSearch);
         async function filterSearch() {
             let filterform = new FormData(document.forms[0]);

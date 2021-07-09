@@ -29,7 +29,7 @@ var Server;
             console.log(error);
         }
     }
-    connectToDB(dbURL).catch(console.error);
+    connectToDB(dbURL).catch(console.error); //hierfür habe infos aus der ressource https://www.mongodb.com/blog/post/quick-start-nodejs-mongodb--how-to-get-connected-to-your-database
     async function handleRequest(_request, _response) {
         //await connectToDB(dbURL);
         _response.setHeader("Access-Control-Allow-Origin", "*");

@@ -1,42 +1,4 @@
-
-
-
 namespace KMJ {
-    
-    
-    
-    
-    ///-------------TO-DO-----------------------------////
-    /*
-    
-    
-    
-    
-    - Favorisierung
-    
-    - editierung & löschung von rezepten
-    
-    
-    - serveranbindung
-    
-    - datenbankanbindung
-    
-    
-    -user creation & login datenbank
-    
-    -rezept datenbank 
-    
-    
-    
-    
-    */  
-    
-    
-    
-    
-    
-    
-    
     
     
     
@@ -46,8 +8,6 @@ namespace KMJ {
         sessionStorage.editRecipeId = "";
         window.location.href = "./create_edit.html";
     }
-    
-    
     
     
     
@@ -183,23 +143,13 @@ namespace KMJ {
         async function getRecipes(_filters: string[], _page: string): Promise<void> {
             //let url: string = "http://localhost:8100/findRecipes";
             let url: string = "https://kochem-mit-jochem.herokuapp.com/findRecipes";
-        
+            
             let recipeRequest: RecipeRequest = { filters: _filters, page: _page, username: sessionStorage.user};
             
             let query: URLSearchParams = new URLSearchParams(<any>recipeRequest);
             url = url + "?" + query.toString();
             let resp: Response = await fetch(url);
             let foundrecipes: RecipeFull[]  = await resp.json();
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
             
             
             let recipiesContainer: HTMLDivElement = <HTMLDivElement> document.getElementById("recepies");
@@ -240,13 +190,13 @@ namespace KMJ {
                 recipeFooter.className = "recipeFooter";
                 recipeContainer.appendChild(recipeFooter);
                 
-
+                
                 let authorParagraph: HTMLParagraphElement = document.createElement("p");
                 authorParagraph.className = "authorPara";
                 authorParagraph.innerHTML = "<i>" + recipe.author + "</i>";
                 recipeFooter.appendChild(authorParagraph);
-
-
+                
+                
                 
                 if (_page == "MYRECIPES") {
                     let deleteIcon: HTMLImageElement = document.createElement("img");
@@ -274,7 +224,7 @@ namespace KMJ {
                 recipeFooter.appendChild(heartimg);
                 
                 
-              
+                
                 
                 //---- replace with recipe ID after database anknüpfung
                 recipeContainer.dataset.recipeId = recipe._id.toString();
@@ -291,7 +241,7 @@ namespace KMJ {
         
         
         
-        //----------------------------------------view Recipe------------//
+        //----------------------------------------view Recipe---------------------------//
         
         async function viewRecipe(_event: Event): Promise<void> {
             let rp: HTMLElement = <HTMLDivElement> _event.target;
@@ -304,7 +254,7 @@ namespace KMJ {
                     let recepieParantelement: HTMLElement = rp.parentElement.parentElement;
                     if (ctrImage.src.includes("heart")) {
                         ctrImage.className = ctrImage.className + " heartClick";   
-                       
+                        
                         console.log(recepieParantelement.dataset.recipeId);
                         //let url: string = "http://localhost:8100/favoriteRecipe?id=" + rp.parentElement.dataset.recipeId + "&username=" + currentuser.username;
                         let url: string = "https://kochem-mit-jochem.herokuapp.com/favoriteRecipe?id=" + recepieParantelement.dataset.recipeId + "&username=" + currentuser.username;
@@ -314,8 +264,8 @@ namespace KMJ {
                         console.log(sR.message);
                         
                         filterSearch();
-                      
-
+                        
+                        
                         return;
                     } else if (ctrImage.src.includes("edit")) {
                         console.log(recepieParantelement.dataset.recipeId);
@@ -336,7 +286,7 @@ namespace KMJ {
                             let resp: Response = await fetch(url);
                             let sR: ServerResponse = await resp.json();
                             console.log(sR.message);
-                           // window.location.href = "./Main.html"; 
+                            // window.location.href = "./Main.html"; 
                             filterSearch();
                         } else {
                             console.log("nein");
@@ -351,14 +301,14 @@ namespace KMJ {
                     } else {
                         rp = rp.parentElement.parentElement;
                     }
-                  /*   sessionStorage.viewRecipeId = rp.dataset.recipeId;
+                    /*   sessionStorage.viewRecipeId = rp.dataset.recipeId;
                     window.location.href = "view.html"; */
                 }
             } 
             sessionStorage.viewRecipeId = rp.dataset.recipeId;
             window.location.href = "view.html";
             
-            //
+            
             
             
             
@@ -369,7 +319,7 @@ namespace KMJ {
         
         
         
-        // --------------------------------------- filtersearch --------//
+        // --------------------------------------- filtersearch -----------------------------------//
         
         
         document.getElementById("submitFilters").addEventListener("click", filterSearch);

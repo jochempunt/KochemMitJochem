@@ -64,7 +64,8 @@ export namespace Server {
         
     }
 
-    connectToDB(dbURL).catch(console.error);
+    connectToDB(dbURL).catch(console.error); //hierfür habe infos aus der ressource https://www.mongodb.com/blog/post/quick-start-nodejs-mongodb--how-to-get-connected-to-your-database
+                                            // verwendet
     
     
     
