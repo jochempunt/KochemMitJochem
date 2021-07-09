@@ -36,6 +36,7 @@ var KMJ;
             }
         }
     }
+    // funktion checkt ob keine der feldern leergelassen worden ist
     function noFieldsEmpty(_formData) {
         for (let entry of _formData) {
             if (entry[1] == "") {

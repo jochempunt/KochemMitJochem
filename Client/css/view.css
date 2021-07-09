@@ -45,7 +45,7 @@ em{
 }
 
 main{
-    height: 100vh;
+    height: 100%;
     margin: 0 0.4rem;
 }
 
@@ -72,7 +72,7 @@ a .fas{
     color: white;
 }
 
-textarea,
+
 input[type="text"],
 input[type="number"]{
     font-size:1em;
@@ -118,6 +118,7 @@ textarea{
     max-width: 377px;
     height: 450px;
     font-size: 1.6em;
+    font-family: inherit;
 }
 
 select{
@@ -227,9 +228,7 @@ select{
         max-width: 540px;
     }
 
-    textarea{
-        font-size: 2em;
-    }
+   
 
     #finishButtonMobile{
         right: 32%;

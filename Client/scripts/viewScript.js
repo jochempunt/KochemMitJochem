@@ -4,7 +4,6 @@ var KMJ;
     if (!sessionStorage.user) {
         window.location.href = "./login.html";
     }
-    //let ingredientCount: number = 2; 
     let currentRecipe = undefined; //vorArbeit für wenn ein rezept bearbeitet oder angezeigt werden soll
     async function getOneRecipe(_searchID) {
         //let url: string = "http://localhost:8100/findOneRecipe";
@@ -18,6 +17,7 @@ var KMJ;
         console.log(sessionStorage.viewRecipeId);
         getOneRecipe(sessionStorage.viewRecipeId).then(view);
     }
+    //funktion die für die allg. anzeige eines rezepts zuständig ist
     function view() {
         if (window.location.href.includes("view")) {
             let title = document.getElementById("Title");
