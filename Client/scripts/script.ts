@@ -16,9 +16,9 @@ namespace KMJ {
     if (!sessionStorage.user) {
         window.location.href = "./login.html";
     } else {
-        console.log(sessionStorage.user);
         
-        console.log("getUser");
+        
+        
         getuser(sessionStorage.user).then(main);
         
     }
@@ -32,19 +32,15 @@ namespace KMJ {
         
         let resp: Response = await fetch(url);
         currentuser = await resp.json();
-        console.log("currentuser=" + currentuser.username);
+        
         
     }
     
     
     function main(): void {
         
-        
-        
         let navicons: NodeListOf<HTMLSpanElement>  = document.querySelectorAll(".iconContainer");
         for (let ico of navicons) {
-            
-            console.log(ico);
             
             ico.addEventListener("click", changePage);
             
@@ -52,26 +48,20 @@ namespace KMJ {
         }
         
         
-        console.log(sessionStorage.currentP);
-        
         switch (sessionStorage.currentP) {
             case "FAVORITES":
-            document.getElementById("faveIconSpan").click();
-            break;
+                document.getElementById("faveIconSpan").click();
+                break;
             case "MYRECIPES":
-            document.getElementById("myIconSpan").click();
+                document.getElementById("myIconSpan").click();
             
-            if (document.getElementById("createIconHidden")) {
-                document.getElementById("createIconHidden").id = "createIcon";
-            }
-            
-            
-            
-            
-            break;
+                if (document.getElementById("createIconHidden")) {
+                    document.getElementById("createIconHidden").id = "createIcon";
+                }
+                break;
             default:
-            document.getElementById("allIconSpan").click();
-            break;
+                document.getElementById("allIconSpan").click();
+                break;
         }
         
         
@@ -83,11 +73,9 @@ namespace KMJ {
             
             let clickedIcon: HTMLSpanElement = <HTMLSpanElement>    _event.target;
             
-            
-            
             let pageId: string = clickedIcon.id;
             
-            console.log(pageId);
+            
             if (sessionStorage.currentP == "MYRECIPES") {
                 if (document.getElementById("createIcon")) {
                     
@@ -101,14 +89,14 @@ namespace KMJ {
                 case "allIconSpan":
                 siteTitle.innerText = "All Recipes";
                 icon = <HTMLElement> document.getElementById("allIconSpan");
-                console.log("allicon-- " + icon);
+                
                 sessionStorage.currentP = "ALL";
                 break;
                 case "faveIconSpan":
                 siteTitle.innerText = "My Favorites";
                 icon = <HTMLSpanElement> document.getElementById("faveIconSpan");
                 sessionStorage.currentP = "FAVORITES";
-                console.log("fave-- " + icon);
+                
                 break;
                 case "myIconSpan":
                 siteTitle.innerText = "My Recipes";
@@ -116,7 +104,7 @@ namespace KMJ {
                 if ( document.getElementById("createIconHidden")) {
                     document.getElementById("createIconHidden").id = "createIcon";
                 }
-                console.log("my-- " + icon);
+                
                 
                 icon =  <HTMLSpanElement> document.getElementById("myIconSpan");
                 break;
@@ -174,13 +162,7 @@ namespace KMJ {
                 recipeContainer.appendChild(timeParagraph);
                 
                 
-                
-                
-                
-                
                 let favorised: boolean = false;
-                
-                console.log(recipe._id.toString());
                 
                 if (currentuser.favorites.includes(recipe._id.toString())) {
                     favorised = true;
@@ -224,13 +206,10 @@ namespace KMJ {
                 recipeFooter.appendChild(heartimg);
                 
                 
-                
-                
-                //---- replace with recipe ID after database anknüpfung
                 recipeContainer.dataset.recipeId = recipe._id.toString();
                 recipiesContainer.appendChild(recipeContainer);
                 
-                recipeContainer.addEventListener("click", viewRecipe);
+                recipeContainer.addEventListener("click", handleRecipeClick);
                 
                 
                 
@@ -241,9 +220,9 @@ namespace KMJ {
         
         
         
-        //----------------------------------------view Recipe---------------------------//
+        //-------------handleClick>>jede klickaktion auf recipe wird in dieser funktion bearbeitet------------------//
         
-        async function viewRecipe(_event: Event): Promise<void> {
+        async function handleRecipeClick(_event: Event): Promise<void> {
             let rp: HTMLElement = <HTMLDivElement> _event.target;
             
             
@@ -255,10 +234,10 @@ namespace KMJ {
                     if (ctrImage.src.includes("heart")) {
                         ctrImage.className = ctrImage.className + " heartClick";   
                         
-                        console.log(recepieParantelement.dataset.recipeId);
+                        
                         //let url: string = "http://localhost:8100/favoriteRecipe?id=" + rp.parentElement.dataset.recipeId + "&username=" + currentuser.username;
                         let url: string = "https://kochem-mit-jochem.herokuapp.com/favoriteRecipe?id=" + recepieParantelement.dataset.recipeId + "&username=" + currentuser.username;
-                        console.log(url);
+                        
                         let resp: Response = await fetch(url);
                         let sR: ServerResponse = await resp.json();
                         console.log(sR.message);
@@ -268,7 +247,7 @@ namespace KMJ {
                         
                         return;
                     } else if (ctrImage.src.includes("edit")) {
-                        console.log(recepieParantelement.dataset.recipeId);
+                        
                         
                         sessionStorage.editRecipeId = recepieParantelement.dataset.recipeId;
                         window.location.href = "./create_edit.html";
@@ -277,20 +256,20 @@ namespace KMJ {
                         //ok/cancel dialog ob jemand wirklich rezept löschen will oder nicht
                         if (confirm("are you sure you want to delete this recipe?")) {
                             let recipeID: string = recepieParantelement.dataset.recipeId;
-                            console.log(recipeID);
+                            
                             
                             //let url: string = "http://localhost:8100/deleteRecipe?id=" + recipeID ;
                             let url: string = "https://kochem-mit-jochem.herokuapp.com/deleteRecipe?id=" + recipeID;
-                            console.log(url);
+                            
                             
                             let resp: Response = await fetch(url);
                             let sR: ServerResponse = await resp.json();
                             console.log(sR.message);
                             // window.location.href = "./Main.html"; 
                             filterSearch();
-                        } else {
-                            console.log("nein");
-                        }
+                        } 
+                        
+                        
                         
                         
                         return;
@@ -301,16 +280,11 @@ namespace KMJ {
                     } else {
                         rp = rp.parentElement.parentElement;
                     }
-                    /*   sessionStorage.viewRecipeId = rp.dataset.recipeId;
-                    window.location.href = "view.html"; */
+                   
                 }
             } 
             sessionStorage.viewRecipeId = rp.dataset.recipeId;
             window.location.href = "view.html";
-            
-            
-            
-            
             
             
         }   
@@ -319,7 +293,7 @@ namespace KMJ {
         
         
         
-        // --------------------------------------- filtersearch -----------------------------------//
+        // ------------------- filtersearch>>suche mit filterparametern -----------------------------//
         
         
         document.getElementById("submitFilters").addEventListener("click", filterSearch);
@@ -338,7 +312,7 @@ namespace KMJ {
             if (filters.length == 0) {
                 filters = ["starter", "main", "dessert", "misc"];
             }
-            console.log(filters);
+            
             
             getRecipes(filters, sessionStorage.currentP);
         }

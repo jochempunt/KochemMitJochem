@@ -20,7 +20,7 @@ namespace KMJ {
     }
     
     if (sessionStorage.viewRecipeID != "") {     // angeklicktes/ausgewähltes rezept wird aus der datenbank geladen
-        console.log(sessionStorage.viewRecipeId);
+        
         
         
         getOneRecipe(sessionStorage.viewRecipeId).then(view);
@@ -54,7 +54,7 @@ namespace KMJ {
             portions.innerText = "" + currentRecipe.portions;
             
             let ingredientList: HTMLUListElement = <HTMLUListElement> document.getElementById("ingredient-list");
-            console.log(currentRecipe.ingredient_Amounts.length);
+            
             
             for (let i: number = 0; i < currentRecipe.ingredient_Amounts.length; i++ ) {
                 let li: HTMLLIElement = document.createElement("li");

@@ -14,7 +14,6 @@ var KMJ;
         console.log(currentRecipe);
     }
     if (sessionStorage.viewRecipeID != "") { // angeklicktes/ausgewähltes rezept wird aus der datenbank geladen
-        console.log(sessionStorage.viewRecipeId);
         getOneRecipe(sessionStorage.viewRecipeId).then(view);
     }
     //funktion die für die allg. anzeige eines rezepts zuständig ist
@@ -34,7 +33,6 @@ var KMJ;
             let portions = document.getElementById("portionNumber");
             portions.innerText = "" + currentRecipe.portions;
             let ingredientList = document.getElementById("ingredient-list");
-            console.log(currentRecipe.ingredient_Amounts.length);
             for (let i = 0; i < currentRecipe.ingredient_Amounts.length; i++) {
                 let li = document.createElement("li");
                 let emAmount = document.createElement("em");

@@ -51,7 +51,6 @@ var KMJ;
         let formdata = new FormData(document.forms[0]);
         if (noFieldsEmpty(formdata)) {
             let newUsername = formdata.get("username").toString();
-            console.log("user: " + newUsername);
             let pw = formdata.get("password").toString();
             let pwRepeat = formdata.get("rpPassword").toString();
             if (pw == pwRepeat) {

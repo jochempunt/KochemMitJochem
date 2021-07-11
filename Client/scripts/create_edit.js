@@ -1,9 +1,8 @@
 "use strict";
 var KMJ;
 (function (KMJ) {
-    // in currentrecipe wird das zu editierenderezept gespeichert.
+    // in currentrecipe wird das zu editierende rezept gespeichert.
     let currentRecipe = undefined;
-    console.log(sessionStorage.editRecipeId);
     let ingredientCount = 2;
     function addIngredientField() {
         let newIngredientAmount = document.createElement("input");
@@ -32,6 +31,7 @@ var KMJ;
             let resp = await fetch(url);
             currentRecipe = await resp.json();
         }
+        //------------------------ edit ---------------------------//
         function edit() {
             // zuerst wird das zu editierende rezept in die jeweiligen formularfelder geladen
             let title = document.getElementById("title");
@@ -52,10 +52,8 @@ var KMJ;
                 }
                 let amountInput = document.getElementById("Amount" + i);
                 amountInput.value = currentRecipe.ingredient_Amounts[i];
-                //amountInput.value = currentRecipe.ingredients[i].amount;
                 let ingredientInput = document.getElementById("IngredientName" + i);
                 ingredientInput.value = currentRecipe.ingredient_Names[i];
-                // ingredientInput.value = currentRecipe.ingredients[i].name;
             }
         }
     }
@@ -77,7 +75,6 @@ var KMJ;
             ingredientNamelist[ingredientNamelist.length] = ingredientName;
             i++;
         }
-        console.log("amount of ingredients = " + i);
         let newRecipe = { title: formdata.get("recipeTitle").toString(),
             duration: formdata.get("duration").toString(),
             course: formdata.get("selectCourse").toString(),
@@ -88,12 +85,9 @@ var KMJ;
             ingredient_Names: ingredientNamelist,
             _id: sessionStorage.editRecipeId
         };
-        console.log(newRecipe);
         //..........send to database...................//
-        console.log(sessionStorage.editRecipeId);
         let url = "";
         if (sessionStorage.editRecipeId != "") {
-            console.log("bro...");
             //url = "http://localhost:8100/editRecipe";  
             url = "https://kochem-mit-jochem.herokuapp.com/editRecipe";
         }
@@ -101,7 +95,6 @@ var KMJ;
             //url = "http://localhost:8100/createRecipe";
             url = "https://kochem-mit-jochem.herokuapp.com/createRecipe";
         }
-        console.log("url = " + url);
         let query = new URLSearchParams(newRecipe);
         url = url + "?" + query.toString();
         let resp = await fetch(url);

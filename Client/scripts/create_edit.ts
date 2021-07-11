@@ -1,10 +1,10 @@
 namespace KMJ {
     
     
-    // in currentrecipe wird das zu editierenderezept gespeichert.
+    // in currentrecipe wird das zu editierende rezept gespeichert.
     let currentRecipe: Recipe = undefined;
     
-    console.log(sessionStorage.editRecipeId);
+    
     
     let ingredientCount: number = 2;
 
@@ -48,7 +48,7 @@ namespace KMJ {
         }
         
         
-        
+        //------------------------ edit ---------------------------//
         function edit(): void {
             
             
@@ -74,8 +74,6 @@ namespace KMJ {
             
 
 
-            
-
 
             for (let i: number = 0; i < ingredientCount; i ++) {
                 if (i >= 2) { //es sind immer mindestens 2 lehre ingredient felder auf der seite
@@ -85,10 +83,10 @@ namespace KMJ {
                 
                 let amountInput: HTMLInputElement = <HTMLInputElement> document.getElementById("Amount" + i);
                 amountInput.value = currentRecipe.ingredient_Amounts[i];
-                //amountInput.value = currentRecipe.ingredients[i].amount;
+                
                 let ingredientInput: HTMLInputElement  = <HTMLInputElement>document.getElementById("IngredientName" + i);
                 ingredientInput.value = currentRecipe.ingredient_Names[i];
-                // ingredientInput.value = currentRecipe.ingredients[i].name;
+                
             }
             
         }
@@ -127,7 +125,7 @@ namespace KMJ {
             ingredientNamelist[ingredientNamelist.length] = ingredientName;
             i++; 
         } 
-        console.log("amount of ingredients = " + i);
+      
         
         
         let newRecipe: RecipeFull = {title: formdata.get("recipeTitle").toString(),
@@ -139,18 +137,17 @@ namespace KMJ {
         ingredient_Amounts: ingredientAmountlist,
         ingredient_Names: ingredientNamelist,
         _id: sessionStorage.editRecipeId
-    };
-        console.log(newRecipe);
-    
+        };
+       
     
     
     
     //..........send to database...................//
-        console.log(sessionStorage.editRecipeId);
+        
         
         let url: string = "";
         if (sessionStorage.editRecipeId != "") {
-        console.log("bro...");
+     
          
         //url = "http://localhost:8100/editRecipe";  
         url = "https://kochem-mit-jochem.herokuapp.com/editRecipe";  
@@ -160,9 +157,6 @@ namespace KMJ {
         }
     
     
-    
-    
-        console.log("url = " + url);
     
         let query: URLSearchParams = new URLSearchParams(<any>newRecipe);
         url = url + "?" + query.toString();
@@ -175,10 +169,7 @@ namespace KMJ {
     
     
     
-}   
-
-
-   
+    }   
 
 
 }

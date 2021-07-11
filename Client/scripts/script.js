@@ -11,8 +11,6 @@ var KMJ;
         window.location.href = "./login.html";
     }
     else {
-        console.log(sessionStorage.user);
-        console.log("getUser");
         getuser(sessionStorage.user).then(main);
     }
     // find user from database
@@ -21,15 +19,12 @@ var KMJ;
         let url = "https://kochem-mit-jochem.herokuapp.com/getUser?" + "username=" + _username;
         let resp = await fetch(url);
         currentuser = await resp.json();
-        console.log("currentuser=" + currentuser.username);
     }
     function main() {
         let navicons = document.querySelectorAll(".iconContainer");
         for (let ico of navicons) {
-            console.log(ico);
             ico.addEventListener("click", changePage);
         }
-        console.log(sessionStorage.currentP);
         switch (sessionStorage.currentP) {
             case "FAVORITES":
                 document.getElementById("faveIconSpan").click();
@@ -49,7 +44,6 @@ var KMJ;
             let icon = undefined;
             let clickedIcon = _event.target;
             let pageId = clickedIcon.id;
-            console.log(pageId);
             if (sessionStorage.currentP == "MYRECIPES") {
                 if (document.getElementById("createIcon")) {
                     document.getElementById("createIcon").id = "createIconHidden";
@@ -59,14 +53,12 @@ var KMJ;
                 case "allIconSpan":
                     siteTitle.innerText = "All Recipes";
                     icon = document.getElementById("allIconSpan");
-                    console.log("allicon-- " + icon);
                     sessionStorage.currentP = "ALL";
                     break;
                 case "faveIconSpan":
                     siteTitle.innerText = "My Favorites";
                     icon = document.getElementById("faveIconSpan");
                     sessionStorage.currentP = "FAVORITES";
-                    console.log("fave-- " + icon);
                     break;
                 case "myIconSpan":
                     siteTitle.innerText = "My Recipes";
@@ -74,7 +66,6 @@ var KMJ;
                     if (document.getElementById("createIconHidden")) {
                         document.getElementById("createIconHidden").id = "createIcon";
                     }
-                    console.log("my-- " + icon);
                     icon = document.getElementById("myIconSpan");
                     break;
             }
@@ -109,7 +100,6 @@ var KMJ;
                 timeParagraph.innerText = recipe.duration;
                 recipeContainer.appendChild(timeParagraph);
                 let favorised = false;
-                console.log(recipe._id.toString());
                 if (currentuser.favorites.includes(recipe._id.toString())) {
                     favorised = true;
                 }
@@ -139,14 +129,13 @@ var KMJ;
                 }
                 heartimg.className = "recipeControllIcon";
                 recipeFooter.appendChild(heartimg);
-                //---- replace with recipe ID after database anknüpfung
                 recipeContainer.dataset.recipeId = recipe._id.toString();
                 recipiesContainer.appendChild(recipeContainer);
-                recipeContainer.addEventListener("click", viewRecipe);
+                recipeContainer.addEventListener("click", handleRecipeClick);
             }
         }
-        //----------------------------------------view Recipe---------------------------//
-        async function viewRecipe(_event) {
+        //-------------handleClick>>jede klickaktion auf recipe wird in dieser funktion bearbeitet------------------//
+        async function handleRecipeClick(_event) {
             let rp = _event.target;
             if (rp.className != "recipe") {
                 if (rp.className == "recipeControllIcon") {
@@ -154,10 +143,8 @@ var KMJ;
                     let recepieParantelement = rp.parentElement.parentElement;
                     if (ctrImage.src.includes("heart")) {
                         ctrImage.className = ctrImage.className + " heartClick";
-                        console.log(recepieParantelement.dataset.recipeId);
                         //let url: string = "http://localhost:8100/favoriteRecipe?id=" + rp.parentElement.dataset.recipeId + "&username=" + currentuser.username;
                         let url = "https://kochem-mit-jochem.herokuapp.com/favoriteRecipe?id=" + recepieParantelement.dataset.recipeId + "&username=" + currentuser.username;
-                        console.log(url);
                         let resp = await fetch(url);
                         let sR = await resp.json();
                         console.log(sR.message);
@@ -165,7 +152,6 @@ var KMJ;
                         return;
                     }
                     else if (ctrImage.src.includes("edit")) {
-                        console.log(recepieParantelement.dataset.recipeId);
                         sessionStorage.editRecipeId = recepieParantelement.dataset.recipeId;
                         window.location.href = "./create_edit.html";
                         return;
@@ -174,18 +160,13 @@ var KMJ;
                         //ok/cancel dialog ob jemand wirklich rezept löschen will oder nicht
                         if (confirm("are you sure you want to delete this recipe?")) {
                             let recipeID = recepieParantelement.dataset.recipeId;
-                            console.log(recipeID);
                             //let url: string = "http://localhost:8100/deleteRecipe?id=" + recipeID ;
                             let url = "https://kochem-mit-jochem.herokuapp.com/deleteRecipe?id=" + recipeID;
-                            console.log(url);
                             let resp = await fetch(url);
                             let sR = await resp.json();
                             console.log(sR.message);
                             // window.location.href = "./Main.html"; 
                             filterSearch();
-                        }
-                        else {
-                            console.log("nein");
                         }
                         return;
                     }
@@ -197,14 +178,12 @@ var KMJ;
                     else {
                         rp = rp.parentElement.parentElement;
                     }
-                    /*   sessionStorage.viewRecipeId = rp.dataset.recipeId;
-                    window.location.href = "view.html"; */
                 }
             }
             sessionStorage.viewRecipeId = rp.dataset.recipeId;
             window.location.href = "view.html";
         }
-        // --------------------------------------- filtersearch -----------------------------------//
+        // ------------------- filtersearch>>suche mit filterparametern -----------------------------//
         document.getElementById("submitFilters").addEventListener("click", filterSearch);
         async function filterSearch() {
             let filterform = new FormData(document.forms[0]);
@@ -218,7 +197,6 @@ var KMJ;
             if (filters.length == 0) {
                 filters = ["starter", "main", "dessert", "misc"];
             }
-            console.log(filters);
             getRecipes(filters, sessionStorage.currentP);
         }
     }

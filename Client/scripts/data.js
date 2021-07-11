@@ -1,6 +1,7 @@
 "use strict";
 var KMJ;
 (function (KMJ) {
+    //klasse für die bereitstellung aller interfaces & ehemalige test daten
     KMJ.users = [
         {
             username: "testUser",

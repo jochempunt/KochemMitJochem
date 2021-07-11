@@ -1,6 +1,9 @@
 namespace KMJ {
 
 
+//klasse für die bereitstellung aller interfaces & ehemalige test daten
+
+
 export interface Recipe {
     title: string;
     author: string;
