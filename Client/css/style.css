@@ -54,7 +54,7 @@ body{
 
 
 .loading{
-    background: linear-gradient(90deg,var(--lightblue), #17a559);
+    background: linear-gradient(90deg,rgb(162, 183, 247), #17a559);
     background-size: 400% 400%;
     animation-name: load;
     animation-duration: 2s;
